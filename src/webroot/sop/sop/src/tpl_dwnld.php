@@ -1,0 +1,127 @@
+<?php
+include_once(__DIR__."/login_check.php");
+include_once(__DIR__."/config.php");
+include_once(__DIR__."/db_common.php");
+
+/**
+ * テンプレート ダウンロード
+ */
+$db = createDBConnection();
+
+// ---------------------------
+// parameters 取得
+// ---------------------------
+$grp_id    = \Sop\Session::getSiteData('grp_id');
+$role_aprv = \Sop\Session::getSiteData('role_aprv');
+$role_upld = \Sop\Session::getSiteData('role_upld');
+$role_user = \Sop\Session::getSiteData('role_user');
+$user_id   = \Sop\Session::getSiteData('user_id');
+
+$btn = (array_key_exists('btn', $_REQUEST)) ? $_REQUEST['btn'] : ''; // word ファイルダウンロードボタンか否か
+if($btn == ''){
+    \Sop\Log::warning(__FILE__, __LINE__, 'btn is empty.');
+    $msg001 = "The process failed: btn is empty"; // 処理に失敗しました : btn is empty 
+    \Sop\Api::exitWithError(array($msg001));
+}
+
+$tpl_id = (array_key_exists('tpl_id', $_REQUEST)) ? $_REQUEST['tpl_id'] : '';
+$schema_id = (array_key_exists('schema_id', $_REQUEST)) ? $_REQUEST['schema_id'] : '';
+
+// ---------------------------
+// データ 取得
+// ---------------------------
+$file_name = '';
+$file_path = '';
+
+// --- 通常のファイルダウンロード（ファイルダウンロード ボタン押下時）
+if($btn == 'normal')
+{
+    $sql = getSQLBaseForSchemaList();
+    $sql .= " AND schema.schema_id = :schema_id";
+
+    $params = array();
+    $params[':schema_id'] = $schema_id;
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute($params);
+
+    $schema = null;
+    foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row){
+        $schema = $row;
+    }
+
+    if($schema == null){
+        \Sop\Log::warning(__FILE__, __LINE__, 'Specified schema does not exist.');
+        $msg002 = "The data already has been deleted."; // 対象のデータは既に削除されています
+        \Sop\Api::exitWithError(array($msg002));
+    }
+
+    $schema_type = $schema['schema_type'];
+    $file_path = $schema['file_path'];
+    $file_path = str_replace('.html', '.entire.html', $file_path);
+
+    if(!file_exists($file_path)){
+        \Sop\Log::warning(__FILE__, __LINE__, 'Specified file does not exist.');
+        $msg003 = "There is not the data."; // 対象のファイルは存在しません
+        \Sop\Api::exitWithError(array($msg003));
+    }
+
+    $info = pathinfo($file_path);
+    $file_name = $schema['original_filename'] . '.' . $info['extension'];
+}
+
+// --- Wordファイルダウンロード（Wordファイルダウンロード ボタン押下時）
+if($btn == 'src')
+{
+    $sql = getSQLBaseForSchemaList();
+    $sql .= " AND schema.tpl_id = :tpl_id AND schema.schema_type = :schema_type";
+
+    $params = array();
+    $params[':tpl_id'] = $tpl_id;
+    $params[':schema_type'] = $SCHEMA_TYPE_SRC;
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute($params);
+
+    $schema = null;
+    foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row){
+        $schema = $row;
+    }
+
+    if($schema == null){
+        \Sop\Log::warning(__FILE__, __LINE__, 'Specified schema does not exist.');
+        $msg004 = "The data already has been deleted."; // 対象のデータは既に削除されています
+        \Sop\Api::exitWithError(array($msg004));
+    }
+
+    $info = pathinfo($schema['file_path']);
+
+    $extensionList = array( '.doc', '.docx' );
+    foreach($extensionList as $i){
+        $file_path = str_replace(".{$info['extension']}", $i, $row['file_path']);
+
+        if(file_exists($file_path)){
+            $file_name = $schema['original_filename'] . $i;
+            break;
+        }
+    }
+}
+
+// ---------------------------
+// 出力処理
+// ---------------------------
+$db = null;
+
+$content_disposition = 'filename*=UTF-8\'\'' . rawurlencode($file_name);
+
+header('Content-Description: File Transfer');
+header('Content-Type: application/octet-stream');
+header('Content-Disposition: attachment;' . $content_disposition);
+header('Cache-Control: no-cache');
+header('Pragma: no-cache');
+header('Content-Length: '.filesize($file_path));
+ob_clean();
+flush();
+readfile($file_path);
+
+exit;

@@ -1,0 +1,753 @@
+3.1.7 (Brainy Betty)
+cd009f45ab025a80dc2a3016cd391fa4f1ac3563
+o:Sass::Tree::RootNode
+:@template"Y /**
+ * @class Ext.tab.Tab
+ */
+
+/**
+ * @var {color}
+ * The base color of Tabs
+ */
+$tab-base-color: $base-color !default;
+
+/**
+ * @var {color}
+ * The base color of hovered Tabs
+ */
+$tab-base-color-over: $tab-base-color !default;
+
+/**
+ * @var {color}
+ * The base color of the active Tabs
+ */
+$tab-base-color-active: $tab-base-color !default;
+
+/**
+ * @var {color}
+ * The base color of disabled Tabs
+ */
+$tab-base-color-disabled: $tab-base-color !default;
+
+/**
+ * @var {color}
+ * The text color of Tabs
+ */
+$tab-color: $color !default;
+
+/**
+ * @var {color}
+ * The text color of hovered Tabs
+ */
+$tab-color-over: $tab-color !default;
+
+/**
+ * @var {color}
+ * The text color of the active Tab
+ */
+$tab-color-active: $tab-color !default;
+
+/**
+ * @var {color}
+ * The text color of disabled Tabs
+ */
+$tab-color-disabled: $tab-color !default;
+
+/**
+ * @var {number}
+ * The font-size of Tabs
+ */
+$tab-font-size: $font-size !default;
+
+/**
+ * @var {number}
+ * The font-size of hovered Tabs
+ */
+$tab-font-size-over: $tab-font-size !default;
+
+/**
+ * @var {number}
+ * The font-size of the active Tab
+ */
+$tab-font-size-active: $tab-font-size !default;
+
+/**
+ * @var {number}
+ * The font-size of disabled Tabs
+ */
+$tab-font-size-disabled: $tab-font-size !default;
+
+/**
+ * @var {string}
+ * The font-family of Tabs
+ */
+$tab-font-family: $font-family !default;
+
+/**
+ * @var {string}
+ * The font-family of hovered Tabs
+ */
+$tab-font-family-over: $tab-font-family !default;
+
+/**
+ * @var {string}
+ * The font-family of the active Tab
+ */
+$tab-font-family-active: $tab-font-family !default;
+
+/**
+ * @var {string}
+ * The font-family of disabled Tabs
+ */
+$tab-font-family-disabled: $tab-font-family !default;
+
+/**
+ * @var {string}
+ * The font-weight of Tabs
+ */
+$tab-font-weight: bold !default;
+
+/**
+ * @var {string}
+ * The font-weight of hovered Tabs
+ */
+$tab-font-weight-over: $tab-font-weight !default;
+
+/**
+ * @var {string}
+ * The font-weight of the active Tab
+ */
+$tab-font-weight-active: $tab-font-weight !default;
+
+/**
+ * @var {string}
+ * The font-weight of disabled Tabs
+ */
+$tab-font-weight-disabled: $tab-font-weight !default;
+
+/**
+ * @var {string}
+ * The Tab cursor
+ */
+$tab-cursor: pointer !default;
+
+/**
+ * @var {string}
+ * The cursor of disabled Tabs
+ */
+$tab-cursor-disabled: default !default;
+
+/**
+ * @var {string/list}
+ * The background-gradient for Tabs. Can be either the name of a predefined gradient
+ * or a list of color stops. Used as the `$type` parameter for 
+ * {@link Global_CSS#background-gradient}.
+ */
+$tab-background-gradient: 'tab' !default;
+
+/**
+ * @var {string/list}
+ * The background-gradient for hovered Tabs. Can be either the name of a predefined gradient
+ * or a list of color stops. Used as the `$type` parameter for 
+ * {@link Global_CSS#background-gradient}.
+ */
+$tab-background-gradient-over: 'tab-over' !default;
+
+/**
+ * @var {string/list}
+ * The background-gradient for the active Tab. Can be either the name of a predefined gradient
+ * or a list of color stops. Used as the `$type` parameter for 
+ * {@link Global_CSS#background-gradient}.
+ */
+$tab-background-gradient-active: 'tab-active' !default;
+
+/**
+ * @var {string/list}
+ * The background-gradient for disabled Tabs. Can be either the name of a predefined gradient
+ * or a list of color stops. Used as the `$type` parameter for 
+ * {@link Global_CSS#background-gradient}.
+ */
+$tab-background-gradient-disabled: 'tab-disabled' !default;
+
+/**
+ * @var {list}
+ * The border-radius of Tabs
+ */
+$tab-border-radius: 4px 4px 0 0 !default;
+
+/**
+ * @var {number}
+ * The border-width of Tabs
+ */
+$tab-border-width: 1px !default;
+
+/**
+ * @var {number/list}
+ * The inner border-width of Tabs
+ */
+$tab-inner-border-width: 1px 1px 0 !default;
+
+/**
+ * @var {color}
+ * The inner border-color of Tabs
+ */
+$tab-inner-border-color: #fff !default;
+
+/**
+ * @var {color}
+ * The border-color of Tabs
+ */
+$tab-border-color: $base-color !default;
+
+/**
+ * @var {color}
+ * The border-color of hovered Tabs
+ */
+$tab-border-color-over: $tab-border-color !default;
+
+/**
+ * @var {color}
+ * The border-color of the active Tab
+ */
+$tab-border-color-active: $tab-border-color !default;
+
+/**
+ * @var {color}
+ * The border-color of disabled Tabs
+ */
+$tab-border-color-disabled: $tab-border-color !default;
+
+/**
+ * @var {number/list}
+ * The padding of Tabs
+ */
+$tab-padding: 3px 9px !default;
+
+/**
+ * @var {number/list}
+ * The padding of the Tab's text element
+ */
+$tab-text-padding: 0 !default;
+
+/**
+ * @var {number}
+ * The line-height of Tabs
+ */
+$tab-line-height: 13px !default;
+
+/**
+ * @var {number/list}
+ * The margin of Tabs. Typically used to add horizontal space between the tabs.
+ */
+$tab-margin: 0 0 0 2px !default;
+
+/**
+ * @var {number}
+ * The width of the Tab close icon
+ */
+$tab-closable-icon-width: 11px !default;
+
+/**
+ * @var {number}
+ * The height of the Tab close icon
+ */
+$tab-closable-icon-height: 11px !default;
+
+/**
+ * @var {number}
+ * The distance to offset the Tab close icon from the top of the tab
+ */
+$tab-closable-icon-top: 2px !default;
+
+/**
+ * @var {number}
+ * The distance to offset the Tab close icon from the right of the tab
+ */
+$tab-closable-icon-right: 2px !default;
+/**
+ * @var {number}
+ * the space in between the text and the close button
+ */
+$tab-closable-icon-spacing: 3px !default;
+
+/**
+ * @var {number}
+ * The opacity of the Tab close icon
+ */
+$tab-closable-icon-opacity: 1 !default;
+
+/**
+ * @var {number}
+ * The opacity of the Tab close icon when hovered
+ */
+$tab-closable-icon-opacity-over: 1 !default;
+
+/**
+ * @var {number}
+ * The opacity of the Tab close icon when the Tab is disabled
+ */
+$tab-closable-icon-opacity-disabled: 1 !default;
+
+/**
+ * @var {boolean}
+ * True to change the x background-postition of the close icon background image on hover
+ * to allow for a horizontally aligned background image sprite
+ */
+$tab-closable-icon-include-hover-background-position: false !default;
+
+/**
+ * @var {boolean}
+ * True to change the x background-postition of the close icon background image on click
+ * to allow for a horizontally aligned background image sprite
+ */
+$tab-closable-icon-include-pressed-background-position: false !default;
+
+/**
+ * @var {number}
+ * The width of Tab icons
+ */
+$tab-icon-width: 16px !default;
+
+/**
+ * @var {number}
+ * The height of Tab icons
+ */
+$tab-icon-height: 16px !default;
+
+/**
+ * @var {number}
+ * The space between the Tab icon and the Tab text
+ */
+$tab-icon-spacing: 4px !default;
+
+/**
+ * @var {number}
+ * The background-position of Tab icons
+ */
+$tab-icon-background-position: center center !default;
+
+/**
+ * @var {color}
+ * The color of Tab glyph icons
+ */
+$tab-glyph-color: $tab-color !default;
+
+/**
+ * @var {color}
+ * The color of a Tab glyph icon when the Tab is hovered
+ */
+$tab-glyph-color-over: $tab-color-over !default;
+
+/**
+ * @var {color}
+ * The color of a Tab glyph icon when the Tab is active
+ */
+$tab-glyph-color-active: $tab-color-active !default;
+
+/**
+ * @var {color}
+ * The color of a Tab glyph icon when the Tab is disabled
+ */
+$tab-glyph-color-disabled: $tab-color-disabled !default;
+
+/**
+ * @var {number}
+ * The opacity of a Tab glyph icon
+ */
+$tab-glyph-opacity: .5 !default;
+
+/**
+ * @var {number}
+ * The opacity of a Tab glyph icon when the Tab is disabled
+ */
+$tab-glyph-opacity-disabled: .3 !default;
+
+/**
+ * @var {number}
+ * opacity to apply to the tab's main element when the tab is disabled
+ */
+$tab-opacity-disabled: 1 !default;
+
+/**
+ * @var {number}
+ * opacity to apply to the tab's text element when the tab is disabled
+ */
+$tab-text-opacity-disabled: .3 !default;
+
+/**
+ * @var {number}
+ * opacity to apply to the tab's icon element when the tab is disabled
+ */
+$tab-icon-opacity-disabled: .5 !default;
+
+/**
+ * @var {string}
+ * Experimental - Has issues with IE
+ * The direction to rotate the contents of a left-aligned tab.  `right` to rotate
+ * clockwise or `left` to rotate counterclockwise. Defaults to `left`.
+ */
+$tab-left-rotate-direction: 'left';
+
+/**
+ * @var {string}
+ * Experimental - Has issues with IE
+ * The direction to rotate the contents of a right-aligned tab.  `right` to rotate
+ * clockwise or `left` to rotate counterclockwise. Defaults to `right`.
+ */
+$tab-right-rotate-direction: 'right';
+
+/**
+ * @var {boolean}
+ * True to include the "default" tab UI
+ */
+$include-tab-default-ui: $include-default-uis !default;
+:@options{ :@has_childrenT:
+@linei:@children[Åo:Sass::Tree::CommentNode:@silent0;@:@lines[ :
+@loud0:@value""/**
+ * @class Ext.tab.Tab
+ */;	i;
+[ o;;0;@;[ ;0;"6/**
+ * @var {color}
+ * The base color of Tabs
+ */;	i
+;
+[ o:Sass::Tree::VariableNode:
+@expro:Sass::Script::Variable	:
+@name"base-color;@:@underscored_name"base_color;	i;"tab-base-color;@:@guarded"!default;	i;
+[ o;;0;@;[ ;0;">/**
+ * @var {color}
+ * The base color of hovered Tabs
+ */;	i;
+[ o;;o;	;"tab-base-color;@;"tab_base_color;	i;"tab-base-color-over;@;"!default;	i;
+[ o;;0;@;[ ;0;"A/**
+ * @var {color}
+ * The base color of the active Tabs
+ */;	i;
+[ o;;o;	;"tab-base-color;@;"tab_base_color;	i;"tab-base-color-active;@;"!default;	i;
+[ o;;0;@;[ ;0;"?/**
+ * @var {color}
+ * The base color of disabled Tabs
+ */;	i;
+[ o;;o;	;"tab-base-color;@;"tab_base_color;	i ;"tab-base-color-disabled;@;"!default;	i ;
+[ o;;0;@;[ ;0;"6/**
+ * @var {color}
+ * The text color of Tabs
+ */;	i";
+[ o;;o;	;"
+color;@;"
+color;	i&;"tab-color;@;"!default;	i&;
+[ o;;0;@;[ ;0;">/**
+ * @var {color}
+ * The text color of hovered Tabs
+ */;	i(;
+[ o;;o;	;"tab-color;@;"tab_color;	i,;"tab-color-over;@;"!default;	i,;
+[ o;;0;@;[ ;0;"@/**
+ * @var {color}
+ * The text color of the active Tab
+ */;	i.;
+[ o;;o;	;"tab-color;@;"tab_color;	i2;"tab-color-active;@;"!default;	i2;
+[ o;;0;@;[ ;0;"?/**
+ * @var {color}
+ * The text color of disabled Tabs
+ */;	i4;
+[ o;;o;	;"tab-color;@;"tab_color;	i8;"tab-color-disabled;@;"!default;	i8;
+[ o;;0;@;[ ;0;"6/**
+ * @var {number}
+ * The font-size of Tabs
+ */;	i:;
+[ o;;o;	;"font-size;@;"font_size;	i>;"tab-font-size;@;"!default;	i>;
+[ o;;0;@;[ ;0;">/**
+ * @var {number}
+ * The font-size of hovered Tabs
+ */;	i@;
+[ o;;o;	;"tab-font-size;@;"tab_font_size;	iD;"tab-font-size-over;@;"!default;	iD;
+[ o;;0;@;[ ;0;"@/**
+ * @var {number}
+ * The font-size of the active Tab
+ */;	iF;
+[ o;;o;	;"tab-font-size;@;"tab_font_size;	iJ;"tab-font-size-active;@;"!default;	iJ;
+[ o;;0;@;[ ;0;"?/**
+ * @var {number}
+ * The font-size of disabled Tabs
+ */;	iL;
+[ o;;o;	;"tab-font-size;@;"tab_font_size;	iP;"tab-font-size-disabled;@;"!default;	iP;
+[ o;;0;@;[ ;0;"8/**
+ * @var {string}
+ * The font-family of Tabs
+ */;	iR;
+[ o;;o;	;"font-family;@;"font_family;	iV;"tab-font-family;@;"!default;	iV;
+[ o;;0;@;[ ;0;"@/**
+ * @var {string}
+ * The font-family of hovered Tabs
+ */;	iX;
+[ o;;o;	;"tab-font-family;@;"tab_font_family;	i\;"tab-font-family-over;@;"!default;	i\;
+[ o;;0;@;[ ;0;"B/**
+ * @var {string}
+ * The font-family of the active Tab
+ */;	i^;
+[ o;;o;	;"tab-font-family;@;"tab_font_family;	ib;"tab-font-family-active;@;"!default;	ib;
+[ o;;0;@;[ ;0;"A/**
+ * @var {string}
+ * The font-family of disabled Tabs
+ */;	id;
+[ o;;o;	;"tab-font-family;@;"tab_font_family;	ih;"tab-font-family-disabled;@;"!default;	ih;
+[ o;;0;@;[ ;0;"8/**
+ * @var {string}
+ * The font-weight of Tabs
+ */;	ij;
+[ o;;o:Sass::Script::String	;@:
+@type:identifier;"	bold;	in;"tab-font-weight;@;"!default;	in;
+[ o;;0;@;[ ;0;"@/**
+ * @var {string}
+ * The font-weight of hovered Tabs
+ */;	ip;
+[ o;;o;	;"tab-font-weight;@;"tab_font_weight;	it;"tab-font-weight-over;@;"!default;	it;
+[ o;;0;@;[ ;0;"B/**
+ * @var {string}
+ * The font-weight of the active Tab
+ */;	iv;
+[ o;;o;	;"tab-font-weight;@;"tab_font_weight;	iz;"tab-font-weight-active;@;"!default;	iz;
+[ o;;0;@;[ ;0;"A/**
+ * @var {string}
+ * The font-weight of disabled Tabs
+ */;	i|;
+[ o;;o;	;"tab-font-weight;@;"tab_font_weight;	i{;"tab-font-weight-disabled;@;"!default;	i{;
+[ o;;0;@;[ ;0;"//**
+ * @var {string}
+ * The Tab cursor
+ */;	i};
+[ o;;o;	;@;;;"pointer;	iÅ;"tab-cursor;@;"!default;	iÅ;
+[ o;;0;@;[ ;0;"</**
+ * @var {string}
+ * The cursor of disabled Tabs
+ */;	iÉ;
+[ o;;o;	;@;;;"default;	iá;"tab-cursor-disabled;@;"!default;	iá;
+[ o;;0;@;[ ;0;"›/**
+ * @var {string/list}
+ * The background-gradient for Tabs. Can be either the name of a predefined gradient
+ * or a list of color stops. Used as the `$type` parameter for 
+ * {@link Global_CSS#background-gradient}.
+ */;	iâ;
+[ o;;o;	;@;:string;"tab;	iè;"tab-background-gradient;@;"!default;	iè;
+[ o;;0;@;[ ;0;"Â/**
+ * @var {string/list}
+ * The background-gradient for hovered Tabs. Can be either the name of a predefined gradient
+ * or a list of color stops. Used as the `$type` parameter for 
+ * {@link Global_CSS#background-gradient}.
+ */;	ië;
+[ o;;o;	;@;;;"tab-over;	ió;"!tab-background-gradient-over;@;"!default;	ió;
+[ o;;0;@;[ ;0;"Á/**
+ * @var {string/list}
+ * The background-gradient for the active Tab. Can be either the name of a predefined gradient
+ * or a list of color stops. Used as the `$type` parameter for 
+ * {@link Global_CSS#background-gradient}.
+ */;	iô;
+[ o;;o;	;@;;;"tab-active;	iü;"#tab-background-gradient-active;@;"!default;	iü;
+[ o;;0;@;[ ;0;"Ê/**
+ * @var {string/list}
+ * The background-gradient for disabled Tabs. Can be either the name of a predefined gradient
+ * or a list of color stops. Used as the `$type` parameter for 
+ * {@link Global_CSS#background-gradient}.
+ */;	i°;
+[ o;;o;	;@;;;"tab-disabled;	iß;"%tab-background-gradient-disabled;@;"!default;	iß;
+[ o;;0;@;[ ;0;"8/**
+ * @var {list}
+ * The border-radius of Tabs
+ */;	i©;
+[ o;;o:Sass::Script::List	;@;[	o:Sass::Script::Number:@original"4px;@:@denominator_units[ ;i	;	i≠:@numerator_units["pxo;;"4px;@;[ ;i	;	i≠;["pxo;;"0;@;[ ;i ;	i≠;[ o;;"0;@;@2;i ;	i≠;[ ;	i≠:@separator:
+space;"tab-border-radius;@;"!default;	i≠;
+[ o;;0;@;[ ;0;"9/**
+ * @var {number}
+ * The border-width of Tabs
+ */;	iØ;
+[ o;;o;;"1px;@;[ ;i;	i≥;["px;"tab-border-width;@;"!default;	i≥;
+[ o;;0;@;[ ;0;"D/**
+ * @var {number/list}
+ * The inner border-width of Tabs
+ */;	iµ;
+[ o;;o;	;@;[o;;"1px;@;[ ;i;	iπ;["pxo;;"1px;@;[ ;i;	iπ;["pxo;;"0;@;@2;i ;	iπ;[ ;	iπ;; ;"tab-inner-border-width;@;"!default;	iπ;
+[ o;;0;@;[ ;0;">/**
+ * @var {color}
+ * The inner border-color of Tabs
+ */;	iª;
+[ o;;o:Sass::Script::Color	:@attrs{	:
+greeniˇ:	blueiˇ:rediˇ:
+alphai;@;0;	iø;"tab-inner-border-color;@;"!default;	iø;
+[ o;;0;@;[ ;0;"8/**
+ * @var {color}
+ * The border-color of Tabs
+ */;	i¡;
+[ o;;o;	;"base-color;@;"base_color;	i≈;"tab-border-color;@;"!default;	i≈;
+[ o;;0;@;[ ;0;"@/**
+ * @var {color}
+ * The border-color of hovered Tabs
+ */;	i«;
+[ o;;o;	;"tab-border-color;@;"tab_border_color;	iÀ;"tab-border-color-over;@;"!default;	iÀ;
+[ o;;0;@;[ ;0;"B/**
+ * @var {color}
+ * The border-color of the active Tab
+ */;	iÕ;
+[ o;;o;	;"tab-border-color;@;"tab_border_color;	i—;"tab-border-color-active;@;"!default;	i—;
+[ o;;0;@;[ ;0;"A/**
+ * @var {color}
+ * The border-color of disabled Tabs
+ */;	i”;
+[ o;;o;	;"tab-border-color;@;"tab_border_color;	i◊;"tab-border-color-disabled;@;"!default;	i◊;
+[ o;;0;@;[ ;0;"9/**
+ * @var {number/list}
+ * The padding of Tabs
+ */;	iŸ;
+[ o;;o;	;@;[o;;"3px;@;[ ;i;	i›;["pxo;;"9px;@;[ ;i;	i›;["px;	i›;; ;"tab-padding;@;"!default;	i›;
+[ o;;0;@;[ ;0;"K/**
+ * @var {number/list}
+ * The padding of the Tab's text element
+ */;	iﬂ;
+[ o;;o;;"0;@;@2;i ;	i„;[ ;"tab-text-padding;@;"!default;	i„;
+[ o;;0;@;[ ;0;"8/**
+ * @var {number}
+ * The line-height of Tabs
+ */;	iÂ;
+[ o;;o;;"	13px;@;[ ;i;	iÈ;["px;"tab-line-height;@;"!default;	iÈ;
+[ o;;0;@;[ ;0;"r/**
+ * @var {number/list}
+ * The margin of Tabs. Typically used to add horizontal space between the tabs.
+ */;	iÎ;
+[ o;;o;	;@;[	o;;"0;@;@2;i ;	iÔ;[ o;;"0;@;@2;i ;	iÔ;[ o;;"0;@;@2;i ;	iÔ;[ o;;"2px;@;[ ;i;	iÔ;["px;	iÔ;; ;"tab-margin;@;"!default;	iÔ;
+[ o;;0;@;[ ;0;"@/**
+ * @var {number}
+ * The width of the Tab close icon
+ */;	iÒ;
+[ o;;o;;"	11px;@;[ ;i;	iı;["px;"tab-closable-icon-width;@;"!default;	iı;
+[ o;;0;@;[ ;0;"A/**
+ * @var {number}
+ * The height of the Tab close icon
+ */;	i˜;
+[ o;;o;;"	11px;@;[ ;i;	i˚;["px;"tab-closable-icon-height;@;"!default;	i˚;
+[ o;;0;@;[ ;0;"b/**
+ * @var {number}
+ * The distance to offset the Tab close icon from the top of the tab
+ */;	i˝;
+[ o;;o;;"2px;@;[ ;i;	i;["px;"tab-closable-icon-top;@;"!default;	i;
+[ o;;0;@;[ ;0;"d/**
+ * @var {number}
+ * The distance to offset the Tab close icon from the right of the tab
+ */;	i;
+[ o;;o;;"2px;@;[ ;i;	i;["px;"tab-closable-icon-right;@;"!default;	i;
+[ o;;0;@;[ ;0;"S/**
+ * @var {number}
+ * the space in between the text and the close button
+ */;	i;
+[ o;;o;;"3px;@;[ ;i;	i;["px;"tab-closable-icon-spacing;@;"!default;	i;
+[ o;;0;@;[ ;0;"B/**
+ * @var {number}
+ * The opacity of the Tab close icon
+ */;	i;
+[ o;;o;;"1;@;@2;i;	i;[ ;"tab-closable-icon-opacity;@;"!default;	i;
+[ o;;0;@;[ ;0;"O/**
+ * @var {number}
+ * The opacity of the Tab close icon when hovered
+ */;	i;
+[ o;;o;;"1;@;@2;i;	i;[ ;"#tab-closable-icon-opacity-over;@;"!default;	i;
+[ o;;0;@;[ ;0;"[/**
+ * @var {number}
+ * The opacity of the Tab close icon when the Tab is disabled
+ */;	i;
+[ o;;o;;"1;@;@2;i;	i;[ ;"'tab-closable-icon-opacity-disabled;@;"!default;	i;
+[ o;;0;@;[ ;0;"±/**
+ * @var {boolean}
+ * True to change the x background-postition of the close icon background image on hover
+ * to allow for a horizontally aligned background image sprite
+ */;	i ;
+[ o;;o:Sass::Script::Bool;@;F;	i%;"8tab-closable-icon-include-hover-background-position;@;"!default;	i%;
+[ o;;0;@;[ ;0;"±/**
+ * @var {boolean}
+ * True to change the x background-postition of the close icon background image on click
+ * to allow for a horizontally aligned background image sprite
+ */;	i';
+[ o;;o;';@;F;	i,;":tab-closable-icon-include-pressed-background-position;@;"!default;	i,;
+[ o;;0;@;[ ;0;"7/**
+ * @var {number}
+ * The width of Tab icons
+ */;	i.;
+[ o;;o;;"	16px;@;[ ;i;	i2;["px;"tab-icon-width;@;"!default;	i2;
+[ o;;0;@;[ ;0;"8/**
+ * @var {number}
+ * The height of Tab icons
+ */;	i4;
+[ o;;o;;"	16px;@;[ ;i;	i8;["px;"tab-icon-height;@;"!default;	i8;
+[ o;;0;@;[ ;0;"P/**
+ * @var {number}
+ * The space between the Tab icon and the Tab text
+ */;	i:;
+[ o;;o;;"4px;@;[ ;i	;	i>;["px;"tab-icon-spacing;@;"!default;	i>;
+[ o;;0;@;[ ;0;"E/**
+ * @var {number}
+ * The background-position of Tab icons
+ */;	i@;
+[ o;;o;	;@;[o;	;@;;;"center;	iDo;	;@;;;"center;	iD;	iD;; ;"!tab-icon-background-position;@;"!default;	iD;
+[ o;;0;@;[ ;0;"</**
+ * @var {color}
+ * The color of Tab glyph icons
+ */;	iF;
+[ o;;o;	;"tab-color;@;"tab_color;	iJ;"tab-glyph-color;@;"!default;	iJ;
+[ o;;0;@;[ ;0;"U/**
+ * @var {color}
+ * The color of a Tab glyph icon when the Tab is hovered
+ */;	iL;
+[ o;;o;	;"tab-color-over;@;"tab_color_over;	iP;"tab-glyph-color-over;@;"!default;	iP;
+[ o;;0;@;[ ;0;"T/**
+ * @var {color}
+ * The color of a Tab glyph icon when the Tab is active
+ */;	iR;
+[ o;;o;	;"tab-color-active;@;"tab_color_active;	iV;"tab-glyph-color-active;@;"!default;	iV;
+[ o;;0;@;[ ;0;"V/**
+ * @var {color}
+ * The color of a Tab glyph icon when the Tab is disabled
+ */;	iX;
+[ o;;o;	;"tab-color-disabled;@;"tab_color_disabled;	i\;"tab-glyph-color-disabled;@;"!default;	i\;
+[ o;;0;@;[ ;0;"@/**
+ * @var {number}
+ * The opacity of a Tab glyph icon
+ */;	i^;
+[ o;;o;;"0.5;@;@2;f0.5;	ib;[ ;"tab-glyph-opacity;@;"!default;	ib;
+[ o;;0;@;[ ;0;"Y/**
+ * @var {number}
+ * The opacity of a Tab glyph icon when the Tab is disabled
+ */;	id;
+[ o;;o;;"0.3;@;@2;f0.29999999999999999 33;	ih;[ ;"tab-glyph-opacity-disabled;@;"!default;	ih;
+[ o;;0;@;[ ;0;"d/**
+ * @var {number}
+ * opacity to apply to the tab's main element when the tab is disabled
+ */;	ij;
+[ o;;o;;"1;@;@2;i;	in;[ ;"tab-opacity-disabled;@;"!default;	in;
+[ o;;0;@;[ ;0;"d/**
+ * @var {number}
+ * opacity to apply to the tab's text element when the tab is disabled
+ */;	ip;
+[ o;;o;;"0.3;@;@2;f0.29999999999999999 33;	it;[ ;"tab-text-opacity-disabled;@;"!default;	it;
+[ o;;0;@;[ ;0;"d/**
+ * @var {number}
+ * opacity to apply to the tab's icon element when the tab is disabled
+ */;	iv;
+[ o;;o;;"0.5;@;@2;f0.5;	iz;[ ;"tab-icon-opacity-disabled;@;"!default;	iz;
+[ o;;0;@;[ ;0;"÷/**
+ * @var {string}
+ * Experimental - Has issues with IE
+ * The direction to rotate the contents of a left-aligned tab.  `right` to rotate
+ * clockwise or `left` to rotate counterclockwise. Defaults to `left`.
+ */;	i|;
+[ o;;o;	;@;;;"	left;	iÇ;"tab-left-rotate-direction;@;0;	iÇ;
+[ o;;0;@;[ ;0;"ÿ/**
+ * @var {string}
+ * Experimental - Has issues with IE
+ * The direction to rotate the contents of a right-aligned tab.  `right` to rotate
+ * clockwise or `left` to rotate counterclockwise. Defaults to `right`.
+ */;	iÑ;
+[ o;;o;	;@;;;"
+right;	iä;"tab-right-rotate-direction;@;0;	iä;
+[ o;;0;@;[ ;0;"F/**
+ * @var {boolean}
+ * True to include the "default" tab UI
+ */;	iå;
+[ o;;o;	;"include-default-uis;@;"include_default_uis;	iê;"include-tab-default-ui;@;"!default;	iê;
+[ 

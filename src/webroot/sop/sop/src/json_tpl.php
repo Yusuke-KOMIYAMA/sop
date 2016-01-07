@@ -1,0 +1,225 @@
+<?php
+include_once(__DIR__."/login_check.php");
+include_once(__DIR__."/config.php");
+include_once(__DIR__."/db_common.php");
+
+/**
+ * テンプレート一覧取得
+ */
+$db = createDBConnection();
+
+// ---------------------------
+// parameters 取得
+// ---------------------------
+$grp_id    = \Sop\Session::getSiteData('grp_id');
+$role_aprv = \Sop\Session::getSiteData('role_aprv');
+$role_upld = \Sop\Session::getSiteData('role_upld');
+$role_user = \Sop\Session::getSiteData('role_user');
+$user_id   = \Sop\Session::getSiteData('user_id');
+
+$is_aprvgrid = (array_key_exists('aprvgrid', $_REQUEST)) ? (bool)$_REQUEST['aprvgrid'] : false;
+
+$node_id = (array_key_exists('node_id', $_REQUEST)) ? $_REQUEST['node_id'] : '';
+$node_type = (array_key_exists('node_type', $_REQUEST)) ? $_REQUEST['node_type'] : '';
+
+$filter_list = (array_key_exists('filter', $_REQUEST)) ? $_REQUEST['filter'] : array();
+$sort = (array_key_exists('sort', $_REQUEST)) ? $_REQUEST['sort'] : '';
+$start = (array_key_exists('start', $_REQUEST)) ? (int)$_REQUEST['start'] : 0;
+$limit = (array_key_exists('limit', $_REQUEST)) ? (int)$_REQUEST['limit'] : 25;
+
+// 絞込み条件
+$pj_id = '';
+$sop_id = '';
+if($node_type == 'pj'){ $pj_id = str_replace('pj_', '', $node_id); }
+if($node_type == 'sop'){ $sop_id = str_replace('sop_', '', $node_id); }
+
+// ---------------------------
+// SQL作成
+// ---------------------------
+// 基本となるSQL
+$sel_sql = getSQLBaseForTplList();
+$sel_sql .= " AND v_sop.grp_id = $grp_id";
+if($is_aprvgrid){ $sel_sql .= " AND tpl.aprv_flg IN ($APRV_FLG_NG, $APRV_FLG_RE)"; }
+if($pj_id != ''){ $sel_sql .= " AND tpl.pj_id = :pj_id"; }
+if($sop_id != ''){ $sel_sql .= " AND tpl.sop_id = :sop_id"; }
+
+// WHERE句
+$where_sql_list = array();
+foreach($filter_list as $filter)
+{
+    $field = getClmnName($filter['field']);
+    $data = $filter['data'];
+
+    if($data['type'] == 'string')
+    {
+        array_push($where_sql_list, " $field LIKE '%{$data['value']}%'");
+    }
+    if($data['type'] == 'numeric')
+    {
+        $sign = getSign($data['comparison']);
+        array_push($where_sql_list, " $field {$sign} {$data['value']}");
+    }
+    if($data['type'] == 'list')
+    {
+        array_push($where_sql_list, " $field IN ({$data['value']})");
+    }
+    if($data['type'] == 'date')
+    {
+        $sign = getSign($data['comparison']);
+        $date = str_replace('/', '-', $data['value']);
+
+        if($sign == '=')
+        {
+            $sdate = "{$date} 00:00:00";
+            $edate = date('Y-m-d H:i:s', strtotime("{$date} 00:00:00 +1 day"));
+            array_push($where_sql_list, " $field >= '$sdate' AND $field < '$edate'");
+        }
+        else
+        {
+            array_push($where_sql_list, " $field $sign '{$date}'");
+        }
+    }
+}
+$where_sql = implode(" AND ", $where_sql_list);
+
+if(count($where_sql_list) > 0) $sel_sql .= " AND $where_sql";
+
+// ---------------------------
+// データ取得
+// ---------------------------
+$params = array();
+//$params[':grp_id'] = $grp_id;
+if($pj_id != ''){ $params[':pj_id'] = $pj_id; }
+if($sop_id != ''){ $params[':sop_id'] = $sop_id; }
+
+// --- 件数取得
+$sql = "SELECT count(*) cnt FROM ($sel_sql) AS tmp";
+
+$stmt = $db->prepare($sql);
+$stmt->execute($params);
+
+$count = 0;
+foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row){
+    $count = $row['cnt'];
+}
+
+// --- データ取得
+// ソート順は新しいもの順
+// $sort_prop = 'tpl.pj_id, tpl.sop_id, tpl.tpl_id';
+$sort_prop = 'tpl.upld_date';
+$sort_dir = 'DESC';
+if($sort != '')
+{
+    $sort_obj = json_decode($sort);
+
+    $sort_prop = '';
+    $sort_dir = '';
+    foreach($sort_obj as $tmp)
+    {
+        $sort_prop = getClmnName($tmp->property);
+        $sort_dir = $tmp->direction;
+    }
+}
+
+$sql = $sel_sql;
+$sql .= " ORDER BY $sort_prop $sort_dir";
+$sql .= " LIMIT $limit OFFSET $start";
+
+$stmt = $db->prepare($sql);
+$stmt->execute($params);
+
+$tpl_list = array();
+foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+{
+    $row['upld_date'] = str_replace('-', '/', $row['upld_date']);
+    $row['aprv_date'] = str_replace('-', '/', $row['aprv_date']);
+    $row['rtn_date'] = str_replace('-', '/', $row['rtn_date']);
+    array_push($tpl_list, $row);
+}
+
+// ---------------------------
+// 終了処理
+// ---------------------------
+$db = null;
+
+header("Content-type:application/json; charset=utf-8");
+$msg001 = "The system succeeded in an accession to the data."; // データの取得に成功しました
+echo json_encode(
+    array('success' => true,
+          'msg'     => \Sop\Api::htmlEncodeLines(array($msg001)),
+          'root'    => \Sop\Api::htmlEncode($tpl_list),
+          'total'   => $count));
+exit;
+
+/**
+ * GridFiltering 対応
+ */
+function getSign($comparison)
+{
+    $sign = '';
+
+    switch($comparison)
+    {
+        case 'lt':
+            $sign = '<';
+            break;
+        case 'gt':
+            $sign = '>';
+            break;
+        case 'eq':
+            $sign = '=';
+            break;
+    }
+
+    return $sign;
+}
+
+function getClmnName($property)
+{
+    $clmn_name = $property;
+
+    switch($property)
+    {
+        case 'grp_id':
+            $clmn_name = 'v_sop.grp_id';
+            break;
+        case 'pj_id':
+            $clmn_name = 'v_sop.pj_id';
+            break;
+        case 'pj_name':
+            $clmn_name = 'v_sop.pj_name';
+            break;
+        case 'sop_id':
+            $clmn_name = 'v_sop.sop_id';
+            break;
+        case 'sop_name':
+            $clmn_name = 'v_sop.sop_name';
+            break;
+        case 'sop_name_en':
+            $clmn_name = 'v_sop.sop_name_en';
+            break;
+        case 'tpl_id':
+            $clmn_name = 'tpl.tpl_id';
+            break;
+        case 'latest_flg':
+            $clmn_name = 'tpl.latest_flg';
+            break;
+        case 'aprv_flg':
+            $clmn_name = 'tpl.aprv_flg';
+            break;
+        case 'upld_date':
+            $clmn_name = 'tpl.upld_date';
+            break;
+        case 'aprv_date':
+            $clmn_name = 'tpl.aprv_date';
+            break;
+        case 'rtn_date':
+            $clmn_name = 'tpl.rtn_date';
+            break;
+        case 'revision_no':
+            $clmn_name = 'tpl.revision_no';
+            break;
+    }
+
+    return $clmn_name;
+}

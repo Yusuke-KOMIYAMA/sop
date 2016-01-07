@@ -1,0 +1,15 @@
+<?php
+require_once __DIR__ . '/../../../../../backend/src/bootstrap.php';
+include_once(__DIR__."/config.php");
+
+/**
+ * Global config の取得
+ */
+
+// ---------------------
+// 出力
+// ---------------------
+
+header("Content-type:application/json; charset=utf-8");
+echo json_encode(array('success'=> true, 'msg'=> \Sop\Api::htmlEncodeLines(array('データの取得に成功しました')), 'root'=> \Sop\SystemConfigForUI::getConfigs()));
+exit;

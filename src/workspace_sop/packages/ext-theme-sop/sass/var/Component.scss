@@ -1,0 +1,20 @@
+$font-family:'Lucida Grande','Hiragino Kaku Gothic ProN',Meiryo, sans-serif !default;
+
+@font-face{
+  font-family: 'MPP';
+  src: url('./fonts/font-awesome-4.1.0/fonts/fontawesome-webfont.eot');
+  src: url('./fonts/font-awesome-4.1.0/fonts/fontawesome-webfont.eot') format('embedded-opentype'), url('./fonts/font-awesome-4.1.0/fonts/fontawesome-webfont.woff') format('woff'), url('./fonts/font-awesome-4.1.0/fonts/fontawesome-webfont.ttf') format('truetype'), url('./fonts/font-awesome-4.1.0/fonts/fontawesome-webfont.svg?') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon-add{background-image:url(../../sop/resources/images/add.png) !important;}
+.icon-upd{background-image:url(../../sop/resources/images/pencil.png) !important;}
+.icon-del{background-image:url(../../sop/resources/images/delete.png) !important;}
+.icon-prev{background-image:url(../../sop/resources/images/eye.png) !important;}
+.icon-dwnld{background-image:url(../../sop/resources/images/page_save.png) !important;}
+.icon-upld{background-image:url(../../sop/resources/images/page_add.png) !important;}
+.icon-aprv{background-image:url(../../sop/resources/images/accept.png) !important;}
+.icon-rtn{background-image:url(../../sop/resources/images/arrow_undo.png) !important;}
+.icon-refresh{background-image:url(../../sop/resources/images/arrow_refresh.png) !important;}
+.icon-detail{background-image:url(../../sop/resources/images/application_view_detail.png) !important;}

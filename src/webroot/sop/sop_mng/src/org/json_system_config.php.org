@@ -1,0 +1,16 @@
+<?php
+// ログインチェックは不要（ログインしていない状態でも使う情報なのでチェックしてはいけない）
+include_once(__DIR__."/../../sop/src/config.php");
+include_once(__DIR__."/../../sop/src/db_common.php");
+
+/**
+ * Global config の取得
+ */
+
+// ---------------------
+// 出力
+// ---------------------
+
+header("Content-type:application/json; charset=utf-8");
+echo json_encode(array('success'=> true, 'msg'=>\Sop\Api::htmlEncodeLines(array('データの取得に成功しました')), 'root'=> \Sop\SystemConfigForUI::getConfigs()));
+exit;

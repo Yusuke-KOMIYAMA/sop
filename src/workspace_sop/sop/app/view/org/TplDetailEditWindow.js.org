@@ -1,0 +1,67 @@
+/**
+ * テンプレート 詳細
+ */
+Ext.define(
+    "sop.view.TplDetailEditWindow", {
+        extend: 'Ext.window.Window',
+        xtype: 'tpldetailedit-window',
+
+        title: '編集',
+        width: 500,
+        height: '50%',
+        bodyPadding: 10,
+        closable: false,
+        modal: true,
+
+        layout: {
+            type: 'fit'
+        },
+        items: [{
+            xtype: 'form',
+            itemId: 'tpl_detail_edit_form',
+
+            autoScroll: true,
+            bodyPadding: 10,
+            defaults: {
+                labelWidth: 150,
+                width: 430,
+                margin: '0 0 10 0'
+            },
+            items: [{
+                xtype: 'hiddenfield',
+                itemId: 'pj_id',
+                name: 'pj_id',
+                value: ''
+            }, {
+                xtype: 'hiddenfield',
+                itemId: 'sop_id',
+                name: 'sop_id',
+                value: ''
+            }, {
+                xtype: 'hiddenfield',
+                itemId: 'tpl_id',
+                name: 'tpl_id',
+                value: ''
+            }, {
+                xtype: 'textfield',
+                itemId: 'tpl_name',
+                name: 'tpl_name',
+                fieldLabel: 'バージョン'
+            }, {
+                xtype: 'textareafield',
+                itemId: 'upld_cmnt',
+                name: 'upld_cmnt',
+                fieldLabel: '登録コメント'
+            }]
+        }],
+
+        buttonAlign: 'center',
+        buttons: [{
+            itemId: 'tpl_detail_edit_btn',
+            text: '送信'
+        }, {
+            itemId: 'tpl_detail_cancel_btn',
+            text: '閉じる'
+        }]
+    }
+);

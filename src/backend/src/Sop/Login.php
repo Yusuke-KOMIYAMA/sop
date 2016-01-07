@@ -1,0 +1,132 @@
+<?php
+
+namespace Sop;
+
+class Login
+{
+    public static function getUser()
+    {
+        // ----------------------------------------
+        // 指定されたuser_id、passwordを求める。
+        // ----------------------------------------
+        $user_id = '';
+        $password = '';
+        $verify_password = true;
+
+        // ログイン済みならば、そのuser_idなどを使う。
+        // （ログインしている最中にuser_idが削除された場合などを考慮して、後でチェックする。）
+        if (Session::getSiteData('user_id') !== null) {
+            $user_id  = Session::getSiteData('user_id');
+            $verify_password = false;
+
+        } else {
+            if (Config::get('use_sso')) {
+                if (Session::getSiteData('sso_user_id') !== null) {
+                    // シングル・サインオン経由でのサインイン
+                    $user_id = Session::getSiteData('sso_user_id');
+                    $verify_password = false;
+
+                } else if (Session::getSiteData('sso_errors') !== null) {
+                    // シングル・サインオンでエラーが発生した
+                    self::exitWithLoginError(array(''), Session::getSiteData('sso_errors'));
+                }
+
+            } else {
+                if (isset($_REQUEST['user_id'])) {
+                    $user_id = $_REQUEST['user_id'];
+                }
+                if (isset($_REQUEST['password'])) {
+                    $password = $_REQUEST['password'];
+                }
+            }
+        }
+
+        if ($user_id == '') {
+            $msg01 = "User Id is not inputted."; // ユーザーIDが入力されていません
+            self::exitWithLoginError(array($msg01), array());
+        }
+
+        // ----------------------------------------
+        // データ取得
+        // ----------------------------------------
+        $sql = getSQLBaseForUser();
+        $sql .= " AND v_user.user_id = :user_id";
+
+        $params = array();
+        $params[':user_id'] = $user_id;
+
+        $user_list = array();
+        foreach (\R::getAll($sql, $params) as $user) {
+            $user['grp_id'] = (int)$user['grp_id'];
+
+            // --- パスワードが一致しない場合はスキップ
+            if ($verify_password) {
+                if ($user['password'] != crypt($password, $user['password'])) {
+                    continue;
+                }
+            }
+
+            // ロールは展開する。
+            $user['role_aprv'] = (bool)(substr($user['role'], 0, 1));
+            $user['role_upld'] = (bool)(substr($user['role'], 1, 1));
+            $user['role_user'] = (bool)(substr($user['role'], 2, 1));
+
+            array_push($user_list, $user);
+        }
+
+        // --- レコードなしの場合はエラー
+        if (count($user_list) == 0) {
+            if (Config::get('use_sso')) {
+                $msg02 = "Account does not relate to the system."; // 'アカウントがシステムに紐づけされていません。
+                self::exitWithLoginError(array(), array($msg02));
+            } else {
+                $msg03 = "User ID and a password are not correct. "; // 'ユーザーID、パスワードが正しくありません
+                self::exitWithLoginError(array($msg03), array());
+            }
+        }
+
+        return $user_list[0];
+    }
+
+    public static function registerToSession($user)
+    {
+        Session::setSiteData('grp_id',    $user['grp_id']);
+        Session::setSiteData('role_aprv', $user['role_aprv']);
+        Session::setSiteData('role_upld', $user['role_upld']);
+        Session::setSiteData('role_user', $user['role_user']);
+        Session::setSiteData('user_id',   $user['user_id']);
+        Session::setSiteData('user_name', $user['user_name']);
+        Session::setSiteData('grp_name',  $user['grp_name']);
+        Session::setSiteData('email',     $user['email']);
+    }
+
+    public static function exitWithSuccess()
+    {
+        header("Content-type:application/json; charset=utf-8");
+        $msg04 = "The authentication was successful. "; // '認証に成功しました
+        echo json_encode(
+            array(
+                'success'   => true,
+                'msg'       => Api::htmlEncode($msg04),
+                'role_aprv' => Session::getSiteData('role_aprv'),
+                'role_upld' => Session::getSiteData('role_upld'),
+                'user_id'   => Api::htmlEncode(Session::getSiteData('user_id')),
+                'grp_name'  => Api::htmlEncode(Session::getSiteData('grp_name')),
+            )
+        );
+        exit;
+    }
+
+    public static function exitWithLoginError(array $msgLines, array $sso_msgLines)
+    {
+        Session::clearSiteData();
+        header("Content-type:application/json; charset=utf-8");
+        echo json_encode(
+            array(
+                'success' => false,
+                'msg'     => Api::htmlEncodeLines($msgLines),
+                'sso_msg' => Api::htmlEncodeLines($sso_msgLines))
+        );
+        exit;
+    }
+}

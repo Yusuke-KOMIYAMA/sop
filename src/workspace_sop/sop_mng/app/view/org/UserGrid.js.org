@@ -1,0 +1,136 @@
+/**
+ * ユーザー Grid
+ */
+Ext.define(
+    "sop_mng.view.UserGrid", {
+        extend: 'Ext.grid.Panel',
+        xtype: 'user-grid',
+
+        store: 'UserStore',
+        selModel: {
+            selType: 'rowmodel'
+        },
+
+        columns: [{
+            xtype: 'rownumberer'
+        }, {
+            dataIndex: 'user_id',
+            text: 'ユーザーID',
+            width: 150
+        }, {
+            dataIndex: 'user_name',
+            text: 'ユーザー名',
+            width: 200
+        }, {
+            dataIndex: 'grp_name',
+            text: '所属グループ',
+            width: 300
+        }, {
+            dataIndex: 'role_aprv',
+            text: '承認',
+            width: 100,
+            xtype: 'templatecolumn',
+            tpl: '<tpl if="role_aprv==1">YES<tpl else>NO</tpl>',
+            sortable: false
+        }, {
+            dataIndex: 'role_upld',
+            text: '登録',
+            width: 100,
+            xtype: 'templatecolumn',
+            tpl: '<tpl if="role_upld==1">YES<tpl else>NO</tpl>',
+            sortable: false
+        }, {
+            dataIndex: 'role_user',
+            text: '一般',
+            width: 100,
+            xtype: 'templatecolumn',
+            tpl: '<tpl if="role_user==1">YES<tpl else>NO</tpl>',
+            sortable: false
+        }, {
+            dataIndex: 'admin_flag',
+            text: '管理',
+            width: 100,
+            xtype: 'templatecolumn',
+            tpl: '<tpl if="admin_flag==1">YES<tpl else>NO</tpl>',
+            sortable: false
+        }, {
+            dataIndex: 'email',
+            text: 'メールアドレス',
+            width: 250,
+            sortable: false
+        }, {
+            dataIndex: 'note',
+            text: '備考',
+            width: 250,
+            sortable: false
+        }],
+
+        features: [{
+            ftype: 'filters',
+            filters: [{
+                type: 'string',
+                dataIndex: 'user_id'
+            }, {
+                type: 'string',
+                dataIndex: 'user_name'
+            }, {
+                type: 'string',
+                dataIndex: 'email'
+            }]
+        }],
+
+        bbar: [{
+            xtype: 'pagingtoolbar',
+            store: 'UserStore',
+            displayInfo: true
+        }],
+
+        initComponent: function() {
+            this.menu = this.buildMenu();
+            this.callParent();
+            this.on({
+                scope: this,
+                itemcontextmenu: this.onItemContextMenu
+            });
+        },
+
+        buildMenu: function() {
+            return Ext.create(
+                'Ext.menu.Menu', {
+                    itemId: 'user_grid_menu',
+                    items: [{
+                        itemId: 'user_add_menu',
+                        iconCls: 'icon-add',
+                        text: '追加'
+                    }, {
+                        itemId: 'user_upd_menu',
+                        iconCls: 'icon-upd',
+                        text: '編集'
+                    }, {
+                        itemId: 'user_pwd_menu',
+                        iconCls: 'icon-upd',
+                        text: 'パスワード変更'
+                    }, {
+                        itemId: 'user_del_menu',
+                        iconCls: 'icon-del',
+                        text: '削除'
+                    }]
+                }
+            );
+        },
+
+        onDestroy: function() {
+            this.menu.destroy();
+            this.callParent();
+        },
+
+        onItemContextMenu: function(grid, rec, item, idx, e, eopts) {
+            var systemConfig = Ext.getStore('SystemConfigStore').getAt(0);
+            if (systemConfig.get('use_sso')) {
+                this.menu.items.map.user_pwd_menu.hidden = true;
+            }
+            e.stopEvent();
+            this.menu.showAt(e.getXY());
+        }
+    }
+);

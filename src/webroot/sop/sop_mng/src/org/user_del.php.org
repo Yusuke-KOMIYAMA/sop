@@ -1,0 +1,73 @@
+<?php
+include_once(__DIR__."/login_check.php");
+include_once(__DIR__."/../../sop/src/config.php");
+include_once(__DIR__."/../../sop/src/db_common.php");
+
+/**
+ * ユーザー 削除
+ */
+$db = createDBConnection();
+
+// ---------------------------
+// parameters 取得
+// ---------------------------
+$user_id = (array_key_exists('user_id', $_REQUEST)) ? $_REQUEST['user_id'] : '';
+
+// --- ユーザー 存在チェック
+$sel_sql = getSQLBaseForOneUser();
+$sel_sql .= " AND user_id = :user_id";
+
+$sql = "SELECT count(*) cnt FROM ($sel_sql) as tmp";
+
+$params = array();
+$params[':user_id'] = $user_id;
+
+$stmt = $db->prepare($sql);
+$stmt->execute($params);
+
+$cnt = 0;
+foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row){
+    $cnt = (int)$row['cnt'];
+}
+
+if($cnt == 0)
+{
+    \Sop\Log::warning(__FILE__, __LINE__, 'User tried to delete non-existent user.');
+    \Sop\Api::exitWithError(array("このユーザーは既に削除されています"));
+}
+
+// 自分自身は削除不可
+if (\Sop\Session::getSiteData('user_id') == $user_id) {
+    \Sop\Log::warning(__FILE__, __LINE__, 'User tried to delete oneself.');
+    \Sop\Api::exitWithError(array("自分自身は削除できません。"));
+}
+
+// ---------------------------
+// データ削除
+// ---------------------------
+$db->beginTransaction();
+
+// --- TBL: user
+$rslt = delUser($db, $user_id);
+if(!$rslt)
+{
+    \Sop\Log::error(__FILE__, __LINE__, 'Failed to delete user.');
+    \Sop\Api::exitWithError(array("削除に失敗しました: user"));
+}
+
+// --- TBL: user_grp
+$rslt = delUserGrp($db, $user_id);
+if(!$rslt)
+{
+    \Sop\Log::error(__FILE__, __LINE__, 'Failed to delete user_grp.');
+    \Sop\Api::exitWithError(array("削除に失敗しました: user_grp"));
+}
+
+// ---------------------------
+// 終了処理
+// ---------------------------
+$db->commit();
+$db = null;
+
+echo json_encode(array('success'=>true, 'msg'=> \Sop\Api::htmlEncodeLines(array('削除が完了しました'))));
+exit;

@@ -1,0 +1,71 @@
+/**
+ * プロジェクト 登録・編集
+ */
+Ext.define(
+    "sop.view.PjWindow", {
+        extend: 'Ext.window.Window',
+        xtype: 'pj-window',
+
+        title: '',
+        width: 500,
+        height: 220,
+        bodyPadding: 10,
+        closable: false,
+        modal: true,
+
+        layout: {
+            type: 'fit'
+        },
+        items: [{
+            xtype: 'form',
+            itemId: 'pj_form',
+
+            bodyPadding: 10,
+            defaults: {
+                labelWidth: 110,
+                width: 450,
+                margin: '0 0 10 0'
+            },
+            items: [{
+                xtype: 'hiddenfield',
+                itemId: 'pj_id',
+                name: 'pj_id',
+                value: ''
+            }, {
+                xtype: 'textfield',
+                itemId: 'pj_name',
+                name: 'pj_name',
+                fieldLabel: 'タイトル',
+                allowBlank: false,
+                msgTarget: 'side'
+            }, {
+                xtype: 'label',
+                text: '対象サンプル'
+            }, {
+                xtype: 'filefield',
+                itemId: 'upld_file',
+                name: 'upld_file',
+                hideLabel: true,
+                allowBlank: false,
+                msgTarget: 'side',
+                buttonText: 'ファイルを選択'
+            }, {
+                xtype: 'button',
+                itemId: 'pj_smpl_dwnld_btn',
+                text: '対象サンプルをダウンロード',
+                width: 200,
+                margin: '0 0 0 250'
+            }]
+        }],
+
+        buttonAlign: 'center',
+        buttons: [{
+            itemId: 'pj_submit_btn',
+            text: '送信',
+            formBind: true
+        }, {
+            itemId: 'pj_cancel_btn',
+            text: 'キャンセル'
+        }]
+    }
+);

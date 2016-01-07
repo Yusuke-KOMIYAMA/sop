@@ -1,0 +1,56 @@
+/**
+ * SOP 標準作業手順書 一覧
+ */
+Ext.define(
+    'tablet.view.ProvisionalFixList', {
+        extend: 'Ext.dataview.List',
+        xtype: 'provisionalfix-list',
+
+        config: {
+            scrollable: true,
+            itemTpl: [
+                '<div style="color:#333333;font-size:80%;padding-bottom:2px"><p style="">',
+                '{pj_name}&nbsp;&nbsp;',
+                '{smpl_given_no}&nbsp;&nbsp;',
+                '{sop_name}&nbsp;&nbsp;',
+                '<span style="float:right">作業完了時刻&nbsp;&nbsp;{upd_date:date("Y-m-d H:i:s")}</span>',
+                '</p></div>'
+            ],
+            store: {
+                xtype: 'provisionalfix-store'
+            },
+
+            plugins: [{
+                xclass: 'Ext.plugin.ListPaging',
+                autoPaging: true
+            }],
+
+            items: [{
+                xtype: 'titlebar',
+                title: '',
+                docked: 'top',
+                items: [{
+                    itemId: 'back_btn',
+                    align: 'left',
+                    ui: 'back',
+                    text: 'プロジェクト一覧'
+                }, {
+                    itemId: 'home_btn',
+                    xtype: 'button',
+                    text: '<span style="font-size:80%;">ログアウト</span>',
+                    align: 'right'
+                }]
+            }, {
+                xtype: 'toolbar',
+                title: '',
+                docked: 'bottom',
+                items: [{
+                    itemId: 'main_btn',
+                    iconCls: 'home',
+                    text: 'Home',
+                    align: 'left'
+                }]
+            }]
+        }
+    }
+);

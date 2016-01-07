@@ -1,0 +1,90 @@
+/* ============================================================ */
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('fonts/font-awesome-4.1.0/fonts/fontawesome-webfont.eot');
+    src: url('fonts/font-awesome-4.1.0/fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/font-awesome-4.1.0/fonts/fontawesome-webfont.woff') format('woff'),
+         url('fonts/font-awesome-4.1.0/fonts/fontawesome-webfont.ttf') format('truetype'),
+         url('fonts/font-awesome-4.1.0/fonts/fontawesome-webfont.svg#fontawesomeregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.fa-white {
+    color: white !important;
+}
+
+/* ============================================================ */
+/* パネル */
+.x-panel-default-framed,
+.x-panel-header-default-framed
+{
+    border-color: #004c68 !important;
+}
+.x-panel-header-default-framed-top
+{
+    background-color: #004c68 !important;
+}
+.x-panel-header-default
+{
+    background-color: #004c68 !important;
+}
+
+/* ヘッダ */
+.main-view-header,
+.main-view-footer {
+    background-color: #004c68 !important;
+}
+
+.x-tab-bar-default
+{
+    background-color: #004c68 !important;
+}
+
+/* ウィンドウの枠 */
+.x-border-layout-ct
+{
+    background-color: #004c68 !important;
+}
+
+/* ウィンドウの枠 */
+.x-window-default,
+.x-window-header
+{
+    border-color: #004c68 !important;
+}
+/* ウィンドウのヘッダ */
+.x-window-header-default-top
+{
+    background-color: #004c68 !important;
+}
+
+/* ============================================================ */
+.header-main {
+    color: white;
+    font-weight: bold;
+    font-size:16px;
+    margin-left:16px;
+}
+
+.header-group-info {
+    color: white;
+    font-weight:bold;
+    font-size:12px;
+    margin-right: 24px;
+}
+.header-user-info {
+    margin-left: 3px;
+    color: white;
+    font-weight:bold;
+    font-size:12px;
+    margin-right: 16px;
+}
+
+.footer-main {
+    display: inline-block;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}

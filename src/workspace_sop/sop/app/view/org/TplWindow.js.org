@@ -1,0 +1,124 @@
+/**
+ * テンプレート 詳細
+ */
+Ext.define(
+    "sop.view.TplWindow", {
+        extend: 'Ext.window.Window',
+        xtype: 'tpl-window',
+
+        title: 'テンプレート 詳細閲覧',
+        width: 500,
+        height: '70%',
+        bodyPadding: 10,
+        closable: false,
+        modal: true,
+
+        layout: {
+            type: 'fit'
+        },
+        items: [{
+            xtype: 'form',
+            itemId: 'tpl_form',
+
+            autoScroll: true,
+            bodyPadding: 10,
+            defaults: {
+                labelWidth: 150,
+                width: 430,
+                margin: '0 0 10 0'
+            },
+            items: [{
+                xtype: 'hiddenfield',
+                itemId: 'pj_id',
+                name: 'pj_id',
+                value: ''
+            }, {
+                xtype: 'hiddenfield',
+                itemId: 'sop_id',
+                name: 'sop_id',
+                value: ''
+            }, {
+                xtype: 'hiddenfield',
+                itemId: 'tpl_id',
+                name: 'tpl_id',
+                value: ''
+            }, {
+                xtype: 'displayfield',
+                itemId: 'pj_name',
+                name: 'pj_name',
+                fieldLabel: 'プロジェクト名'
+            }, {
+                xtype: 'displayfield',
+                itemId: 'sop_name',
+                name: 'sop_name',
+                fieldLabel: '手順書名'
+            }, {
+                xtype: 'displayfield',
+                itemId: 'tpl_name',
+                name: 'tpl_name',
+                fieldLabel: 'バージョン'
+            }, {
+                xtype: 'displayfield',
+                itemId: 'latest_flg',
+                name: 'latest_flg',
+                fieldLabel: '最新'
+            }, {
+                xtype: 'displayfield',
+                itemId: 'aprv_flg',
+                name: 'aprv_flg',
+                fieldLabel: 'ステータス'
+            }, {
+                xtype: 'displayfield',
+                itemId: 'upld_user',
+                name: 'upld_user',
+                fieldLabel: '登録者'
+            }, {
+                xtype: 'displayfield',
+                itemId: 'upld_date',
+                name: 'upld_date',
+                fieldLabel: '登録日時'
+            }, {
+                xtype: 'displayfield',
+                itemId: 'upld_cmnt',
+                name: 'upld_cmnt',
+                fieldLabel: '登録コメント'
+            }, {
+                xtype: 'displayfield',
+                itemId: 'rtn_user',
+                name: 'rtn_user',
+                fieldLabel: '差戻し者'
+            }, {
+                xtype: 'displayfield',
+                itemId: 'rtn_date',
+                name: 'rtn_date',
+                fieldLabel: '差戻し日時'
+            }, {
+                xtype: 'displayfield',
+                itemId: 'rtn_cmnt',
+                name: 'rtn_cmnt',
+                fieldLabel: '差戻しコメント'
+            }, {
+                xtype: 'displayfield',
+                itemId: 'aprv_user',
+                name: 'aprv_user',
+                fieldLabel: '承認者'
+            }, {
+                xtype: 'displayfield',
+                itemId: 'aprv_date',
+                name: 'aprv_date',
+                fieldLabel: '承認日時'
+            }, {
+                xtype: 'displayfield',
+                itemId: 'aprv_cmnt',
+                name: 'aprv_cmnt',
+                fieldLabel: '承認コメント'
+            }]
+        }],
+
+        buttonAlign: 'center',
+        buttons: [{
+            itemId: 'tpl_cancel_btn',
+            text: '閉じる'
+        }]
+    }
+);

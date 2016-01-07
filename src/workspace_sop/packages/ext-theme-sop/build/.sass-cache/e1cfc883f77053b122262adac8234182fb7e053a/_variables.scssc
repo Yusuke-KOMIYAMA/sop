@@ -1,0 +1,1547 @@
+3.1.7 (Brainy Betty)
+5da49701fb838f3c4cfb556ed220d61e7c51b34d
+o:Sass::Tree::RootNode
+:@template"8// Variables
+// --------------------------
+
+$fa-font-path:        "../fonts" !default;
+//$fa-font-path:        "//netdna.bootstrapcdn.com/font-awesome/4.1.0/fonts" !default; // for referencing Bootstrap CDN font files directly
+$fa-css-prefix:       fa !default;
+$fa-version:          "4.1.0" !default;
+$fa-border-color:     #eee !default;
+$fa-inverse:          #fff !default;
+$fa-li-width:         (30em / 14) !default;
+
+$fa-var-adjust: "\f042";
+$fa-var-adn: "\f170";
+$fa-var-align-center: "\f037";
+$fa-var-align-justify: "\f039";
+$fa-var-align-left: "\f036";
+$fa-var-align-right: "\f038";
+$fa-var-ambulance: "\f0f9";
+$fa-var-anchor: "\f13d";
+$fa-var-android: "\f17b";
+$fa-var-angle-double-down: "\f103";
+$fa-var-angle-double-left: "\f100";
+$fa-var-angle-double-right: "\f101";
+$fa-var-angle-double-up: "\f102";
+$fa-var-angle-down: "\f107";
+$fa-var-angle-left: "\f104";
+$fa-var-angle-right: "\f105";
+$fa-var-angle-up: "\f106";
+$fa-var-apple: "\f179";
+$fa-var-archive: "\f187";
+$fa-var-arrow-circle-down: "\f0ab";
+$fa-var-arrow-circle-left: "\f0a8";
+$fa-var-arrow-circle-o-down: "\f01a";
+$fa-var-arrow-circle-o-left: "\f190";
+$fa-var-arrow-circle-o-right: "\f18e";
+$fa-var-arrow-circle-o-up: "\f01b";
+$fa-var-arrow-circle-right: "\f0a9";
+$fa-var-arrow-circle-up: "\f0aa";
+$fa-var-arrow-down: "\f063";
+$fa-var-arrow-left: "\f060";
+$fa-var-arrow-right: "\f061";
+$fa-var-arrow-up: "\f062";
+$fa-var-arrows: "\f047";
+$fa-var-arrows-alt: "\f0b2";
+$fa-var-arrows-h: "\f07e";
+$fa-var-arrows-v: "\f07d";
+$fa-var-asterisk: "\f069";
+$fa-var-automobile: "\f1b9";
+$fa-var-backward: "\f04a";
+$fa-var-ban: "\f05e";
+$fa-var-bank: "\f19c";
+$fa-var-bar-chart-o: "\f080";
+$fa-var-barcode: "\f02a";
+$fa-var-bars: "\f0c9";
+$fa-var-beer: "\f0fc";
+$fa-var-behance: "\f1b4";
+$fa-var-behance-square: "\f1b5";
+$fa-var-bell: "\f0f3";
+$fa-var-bell-o: "\f0a2";
+$fa-var-bitbucket: "\f171";
+$fa-var-bitbucket-square: "\f172";
+$fa-var-bitcoin: "\f15a";
+$fa-var-bold: "\f032";
+$fa-var-bolt: "\f0e7";
+$fa-var-bomb: "\f1e2";
+$fa-var-book: "\f02d";
+$fa-var-bookmark: "\f02e";
+$fa-var-bookmark-o: "\f097";
+$fa-var-briefcase: "\f0b1";
+$fa-var-btc: "\f15a";
+$fa-var-bug: "\f188";
+$fa-var-building: "\f1ad";
+$fa-var-building-o: "\f0f7";
+$fa-var-bullhorn: "\f0a1";
+$fa-var-bullseye: "\f140";
+$fa-var-cab: "\f1ba";
+$fa-var-calendar: "\f073";
+$fa-var-calendar-o: "\f133";
+$fa-var-camera: "\f030";
+$fa-var-camera-retro: "\f083";
+$fa-var-car: "\f1b9";
+$fa-var-caret-down: "\f0d7";
+$fa-var-caret-left: "\f0d9";
+$fa-var-caret-right: "\f0da";
+$fa-var-caret-square-o-down: "\f150";
+$fa-var-caret-square-o-left: "\f191";
+$fa-var-caret-square-o-right: "\f152";
+$fa-var-caret-square-o-up: "\f151";
+$fa-var-caret-up: "\f0d8";
+$fa-var-certificate: "\f0a3";
+$fa-var-chain: "\f0c1";
+$fa-var-chain-broken: "\f127";
+$fa-var-check: "\f00c";
+$fa-var-check-circle: "\f058";
+$fa-var-check-circle-o: "\f05d";
+$fa-var-check-square: "\f14a";
+$fa-var-check-square-o: "\f046";
+$fa-var-chevron-circle-down: "\f13a";
+$fa-var-chevron-circle-left: "\f137";
+$fa-var-chevron-circle-right: "\f138";
+$fa-var-chevron-circle-up: "\f139";
+$fa-var-chevron-down: "\f078";
+$fa-var-chevron-left: "\f053";
+$fa-var-chevron-right: "\f054";
+$fa-var-chevron-up: "\f077";
+$fa-var-child: "\f1ae";
+$fa-var-circle: "\f111";
+$fa-var-circle-o: "\f10c";
+$fa-var-circle-o-notch: "\f1ce";
+$fa-var-circle-thin: "\f1db";
+$fa-var-clipboard: "\f0ea";
+$fa-var-clock-o: "\f017";
+$fa-var-cloud: "\f0c2";
+$fa-var-cloud-download: "\f0ed";
+$fa-var-cloud-upload: "\f0ee";
+$fa-var-cny: "\f157";
+$fa-var-code: "\f121";
+$fa-var-code-fork: "\f126";
+$fa-var-codepen: "\f1cb";
+$fa-var-coffee: "\f0f4";
+$fa-var-cog: "\f013";
+$fa-var-cogs: "\f085";
+$fa-var-columns: "\f0db";
+$fa-var-comment: "\f075";
+$fa-var-comment-o: "\f0e5";
+$fa-var-comments: "\f086";
+$fa-var-comments-o: "\f0e6";
+$fa-var-compass: "\f14e";
+$fa-var-compress: "\f066";
+$fa-var-copy: "\f0c5";
+$fa-var-credit-card: "\f09d";
+$fa-var-crop: "\f125";
+$fa-var-crosshairs: "\f05b";
+$fa-var-css3: "\f13c";
+$fa-var-cube: "\f1b2";
+$fa-var-cubes: "\f1b3";
+$fa-var-cut: "\f0c4";
+$fa-var-cutlery: "\f0f5";
+$fa-var-dashboard: "\f0e4";
+$fa-var-database: "\f1c0";
+$fa-var-dedent: "\f03b";
+$fa-var-delicious: "\f1a5";
+$fa-var-desktop: "\f108";
+$fa-var-deviantart: "\f1bd";
+$fa-var-digg: "\f1a6";
+$fa-var-dollar: "\f155";
+$fa-var-dot-circle-o: "\f192";
+$fa-var-download: "\f019";
+$fa-var-dribbble: "\f17d";
+$fa-var-dropbox: "\f16b";
+$fa-var-drupal: "\f1a9";
+$fa-var-edit: "\f044";
+$fa-var-eject: "\f052";
+$fa-var-ellipsis-h: "\f141";
+$fa-var-ellipsis-v: "\f142";
+$fa-var-empire: "\f1d1";
+$fa-var-envelope: "\f0e0";
+$fa-var-envelope-o: "\f003";
+$fa-var-envelope-square: "\f199";
+$fa-var-eraser: "\f12d";
+$fa-var-eur: "\f153";
+$fa-var-euro: "\f153";
+$fa-var-exchange: "\f0ec";
+$fa-var-exclamation: "\f12a";
+$fa-var-exclamation-circle: "\f06a";
+$fa-var-exclamation-triangle: "\f071";
+$fa-var-expand: "\f065";
+$fa-var-external-link: "\f08e";
+$fa-var-external-link-square: "\f14c";
+$fa-var-eye: "\f06e";
+$fa-var-eye-slash: "\f070";
+$fa-var-facebook: "\f09a";
+$fa-var-facebook-square: "\f082";
+$fa-var-fast-backward: "\f049";
+$fa-var-fast-forward: "\f050";
+$fa-var-fax: "\f1ac";
+$fa-var-female: "\f182";
+$fa-var-fighter-jet: "\f0fb";
+$fa-var-file: "\f15b";
+$fa-var-file-archive-o: "\f1c6";
+$fa-var-file-audio-o: "\f1c7";
+$fa-var-file-code-o: "\f1c9";
+$fa-var-file-excel-o: "\f1c3";
+$fa-var-file-image-o: "\f1c5";
+$fa-var-file-movie-o: "\f1c8";
+$fa-var-file-o: "\f016";
+$fa-var-file-pdf-o: "\f1c1";
+$fa-var-file-photo-o: "\f1c5";
+$fa-var-file-picture-o: "\f1c5";
+$fa-var-file-powerpoint-o: "\f1c4";
+$fa-var-file-sound-o: "\f1c7";
+$fa-var-file-text: "\f15c";
+$fa-var-file-text-o: "\f0f6";
+$fa-var-file-video-o: "\f1c8";
+$fa-var-file-word-o: "\f1c2";
+$fa-var-file-zip-o: "\f1c6";
+$fa-var-files-o: "\f0c5";
+$fa-var-film: "\f008";
+$fa-var-filter: "\f0b0";
+$fa-var-fire: "\f06d";
+$fa-var-fire-extinguisher: "\f134";
+$fa-var-flag: "\f024";
+$fa-var-flag-checkered: "\f11e";
+$fa-var-flag-o: "\f11d";
+$fa-var-flash: "\f0e7";
+$fa-var-flask: "\f0c3";
+$fa-var-flickr: "\f16e";
+$fa-var-floppy-o: "\f0c7";
+$fa-var-folder: "\f07b";
+$fa-var-folder-o: "\f114";
+$fa-var-folder-open: "\f07c";
+$fa-var-folder-open-o: "\f115";
+$fa-var-font: "\f031";
+$fa-var-forward: "\f04e";
+$fa-var-foursquare: "\f180";
+$fa-var-frown-o: "\f119";
+$fa-var-gamepad: "\f11b";
+$fa-var-gavel: "\f0e3";
+$fa-var-gbp: "\f154";
+$fa-var-ge: "\f1d1";
+$fa-var-gear: "\f013";
+$fa-var-gears: "\f085";
+$fa-var-gift: "\f06b";
+$fa-var-git: "\f1d3";
+$fa-var-git-square: "\f1d2";
+$fa-var-github: "\f09b";
+$fa-var-github-alt: "\f113";
+$fa-var-github-square: "\f092";
+$fa-var-gittip: "\f184";
+$fa-var-glass: "\f000";
+$fa-var-globe: "\f0ac";
+$fa-var-google: "\f1a0";
+$fa-var-google-plus: "\f0d5";
+$fa-var-google-plus-square: "\f0d4";
+$fa-var-graduation-cap: "\f19d";
+$fa-var-group: "\f0c0";
+$fa-var-h-square: "\f0fd";
+$fa-var-hacker-news: "\f1d4";
+$fa-var-hand-o-down: "\f0a7";
+$fa-var-hand-o-left: "\f0a5";
+$fa-var-hand-o-right: "\f0a4";
+$fa-var-hand-o-up: "\f0a6";
+$fa-var-hdd-o: "\f0a0";
+$fa-var-header: "\f1dc";
+$fa-var-headphones: "\f025";
+$fa-var-heart: "\f004";
+$fa-var-heart-o: "\f08a";
+$fa-var-history: "\f1da";
+$fa-var-home: "\f015";
+$fa-var-hospital-o: "\f0f8";
+$fa-var-html5: "\f13b";
+$fa-var-image: "\f03e";
+$fa-var-inbox: "\f01c";
+$fa-var-indent: "\f03c";
+$fa-var-info: "\f129";
+$fa-var-info-circle: "\f05a";
+$fa-var-inr: "\f156";
+$fa-var-instagram: "\f16d";
+$fa-var-institution: "\f19c";
+$fa-var-italic: "\f033";
+$fa-var-joomla: "\f1aa";
+$fa-var-jpy: "\f157";
+$fa-var-jsfiddle: "\f1cc";
+$fa-var-key: "\f084";
+$fa-var-keyboard-o: "\f11c";
+$fa-var-krw: "\f159";
+$fa-var-language: "\f1ab";
+$fa-var-laptop: "\f109";
+$fa-var-leaf: "\f06c";
+$fa-var-legal: "\f0e3";
+$fa-var-lemon-o: "\f094";
+$fa-var-level-down: "\f149";
+$fa-var-level-up: "\f148";
+$fa-var-life-bouy: "\f1cd";
+$fa-var-life-ring: "\f1cd";
+$fa-var-life-saver: "\f1cd";
+$fa-var-lightbulb-o: "\f0eb";
+$fa-var-link: "\f0c1";
+$fa-var-linkedin: "\f0e1";
+$fa-var-linkedin-square: "\f08c";
+$fa-var-linux: "\f17c";
+$fa-var-list: "\f03a";
+$fa-var-list-alt: "\f022";
+$fa-var-list-ol: "\f0cb";
+$fa-var-list-ul: "\f0ca";
+$fa-var-location-arrow: "\f124";
+$fa-var-lock: "\f023";
+$fa-var-long-arrow-down: "\f175";
+$fa-var-long-arrow-left: "\f177";
+$fa-var-long-arrow-right: "\f178";
+$fa-var-long-arrow-up: "\f176";
+$fa-var-magic: "\f0d0";
+$fa-var-magnet: "\f076";
+$fa-var-mail-forward: "\f064";
+$fa-var-mail-reply: "\f112";
+$fa-var-mail-reply-all: "\f122";
+$fa-var-male: "\f183";
+$fa-var-map-marker: "\f041";
+$fa-var-maxcdn: "\f136";
+$fa-var-medkit: "\f0fa";
+$fa-var-meh-o: "\f11a";
+$fa-var-microphone: "\f130";
+$fa-var-microphone-slash: "\f131";
+$fa-var-minus: "\f068";
+$fa-var-minus-circle: "\f056";
+$fa-var-minus-square: "\f146";
+$fa-var-minus-square-o: "\f147";
+$fa-var-mobile: "\f10b";
+$fa-var-mobile-phone: "\f10b";
+$fa-var-money: "\f0d6";
+$fa-var-moon-o: "\f186";
+$fa-var-mortar-board: "\f19d";
+$fa-var-music: "\f001";
+$fa-var-navicon: "\f0c9";
+$fa-var-openid: "\f19b";
+$fa-var-outdent: "\f03b";
+$fa-var-pagelines: "\f18c";
+$fa-var-paper-plane: "\f1d8";
+$fa-var-paper-plane-o: "\f1d9";
+$fa-var-paperclip: "\f0c6";
+$fa-var-paragraph: "\f1dd";
+$fa-var-paste: "\f0ea";
+$fa-var-pause: "\f04c";
+$fa-var-paw: "\f1b0";
+$fa-var-pencil: "\f040";
+$fa-var-pencil-square: "\f14b";
+$fa-var-pencil-square-o: "\f044";
+$fa-var-phone: "\f095";
+$fa-var-phone-square: "\f098";
+$fa-var-photo: "\f03e";
+$fa-var-picture-o: "\f03e";
+$fa-var-pied-piper: "\f1a7";
+$fa-var-pied-piper-alt: "\f1a8";
+$fa-var-pied-piper-square: "\f1a7";
+$fa-var-pinterest: "\f0d2";
+$fa-var-pinterest-square: "\f0d3";
+$fa-var-plane: "\f072";
+$fa-var-play: "\f04b";
+$fa-var-play-circle: "\f144";
+$fa-var-play-circle-o: "\f01d";
+$fa-var-plus: "\f067";
+$fa-var-plus-circle: "\f055";
+$fa-var-plus-square: "\f0fe";
+$fa-var-plus-square-o: "\f196";
+$fa-var-power-off: "\f011";
+$fa-var-print: "\f02f";
+$fa-var-puzzle-piece: "\f12e";
+$fa-var-qq: "\f1d6";
+$fa-var-qrcode: "\f029";
+$fa-var-question: "\f128";
+$fa-var-question-circle: "\f059";
+$fa-var-quote-left: "\f10d";
+$fa-var-quote-right: "\f10e";
+$fa-var-ra: "\f1d0";
+$fa-var-random: "\f074";
+$fa-var-rebel: "\f1d0";
+$fa-var-recycle: "\f1b8";
+$fa-var-reddit: "\f1a1";
+$fa-var-reddit-square: "\f1a2";
+$fa-var-refresh: "\f021";
+$fa-var-renren: "\f18b";
+$fa-var-reorder: "\f0c9";
+$fa-var-repeat: "\f01e";
+$fa-var-reply: "\f112";
+$fa-var-reply-all: "\f122";
+$fa-var-retweet: "\f079";
+$fa-var-rmb: "\f157";
+$fa-var-road: "\f018";
+$fa-var-rocket: "\f135";
+$fa-var-rotate-left: "\f0e2";
+$fa-var-rotate-right: "\f01e";
+$fa-var-rouble: "\f158";
+$fa-var-rss: "\f09e";
+$fa-var-rss-square: "\f143";
+$fa-var-rub: "\f158";
+$fa-var-ruble: "\f158";
+$fa-var-rupee: "\f156";
+$fa-var-save: "\f0c7";
+$fa-var-scissors: "\f0c4";
+$fa-var-search: "\f002";
+$fa-var-search-minus: "\f010";
+$fa-var-search-plus: "\f00e";
+$fa-var-send: "\f1d8";
+$fa-var-send-o: "\f1d9";
+$fa-var-share: "\f064";
+$fa-var-share-alt: "\f1e0";
+$fa-var-share-alt-square: "\f1e1";
+$fa-var-share-square: "\f14d";
+$fa-var-share-square-o: "\f045";
+$fa-var-shield: "\f132";
+$fa-var-shopping-cart: "\f07a";
+$fa-var-sign-in: "\f090";
+$fa-var-sign-out: "\f08b";
+$fa-var-signal: "\f012";
+$fa-var-sitemap: "\f0e8";
+$fa-var-skype: "\f17e";
+$fa-var-slack: "\f198";
+$fa-var-sliders: "\f1de";
+$fa-var-smile-o: "\f118";
+$fa-var-sort: "\f0dc";
+$fa-var-sort-alpha-asc: "\f15d";
+$fa-var-sort-alpha-desc: "\f15e";
+$fa-var-sort-amount-asc: "\f160";
+$fa-var-sort-amount-desc: "\f161";
+$fa-var-sort-asc: "\f0de";
+$fa-var-sort-desc: "\f0dd";
+$fa-var-sort-down: "\f0dd";
+$fa-var-sort-numeric-asc: "\f162";
+$fa-var-sort-numeric-desc: "\f163";
+$fa-var-sort-up: "\f0de";
+$fa-var-soundcloud: "\f1be";
+$fa-var-space-shuttle: "\f197";
+$fa-var-spinner: "\f110";
+$fa-var-spoon: "\f1b1";
+$fa-var-spotify: "\f1bc";
+$fa-var-square: "\f0c8";
+$fa-var-square-o: "\f096";
+$fa-var-stack-exchange: "\f18d";
+$fa-var-stack-overflow: "\f16c";
+$fa-var-star: "\f005";
+$fa-var-star-half: "\f089";
+$fa-var-star-half-empty: "\f123";
+$fa-var-star-half-full: "\f123";
+$fa-var-star-half-o: "\f123";
+$fa-var-star-o: "\f006";
+$fa-var-steam: "\f1b6";
+$fa-var-steam-square: "\f1b7";
+$fa-var-step-backward: "\f048";
+$fa-var-step-forward: "\f051";
+$fa-var-stethoscope: "\f0f1";
+$fa-var-stop: "\f04d";
+$fa-var-strikethrough: "\f0cc";
+$fa-var-stumbleupon: "\f1a4";
+$fa-var-stumbleupon-circle: "\f1a3";
+$fa-var-subscript: "\f12c";
+$fa-var-suitcase: "\f0f2";
+$fa-var-sun-o: "\f185";
+$fa-var-superscript: "\f12b";
+$fa-var-support: "\f1cd";
+$fa-var-table: "\f0ce";
+$fa-var-tablet: "\f10a";
+$fa-var-tachometer: "\f0e4";
+$fa-var-tag: "\f02b";
+$fa-var-tags: "\f02c";
+$fa-var-tasks: "\f0ae";
+$fa-var-taxi: "\f1ba";
+$fa-var-tencent-weibo: "\f1d5";
+$fa-var-terminal: "\f120";
+$fa-var-text-height: "\f034";
+$fa-var-text-width: "\f035";
+$fa-var-th: "\f00a";
+$fa-var-th-large: "\f009";
+$fa-var-th-list: "\f00b";
+$fa-var-thumb-tack: "\f08d";
+$fa-var-thumbs-down: "\f165";
+$fa-var-thumbs-o-down: "\f088";
+$fa-var-thumbs-o-up: "\f087";
+$fa-var-thumbs-up: "\f164";
+$fa-var-ticket: "\f145";
+$fa-var-times: "\f00d";
+$fa-var-times-circle: "\f057";
+$fa-var-times-circle-o: "\f05c";
+$fa-var-tint: "\f043";
+$fa-var-toggle-down: "\f150";
+$fa-var-toggle-left: "\f191";
+$fa-var-toggle-right: "\f152";
+$fa-var-toggle-up: "\f151";
+$fa-var-trash-o: "\f014";
+$fa-var-tree: "\f1bb";
+$fa-var-trello: "\f181";
+$fa-var-trophy: "\f091";
+$fa-var-truck: "\f0d1";
+$fa-var-try: "\f195";
+$fa-var-tumblr: "\f173";
+$fa-var-tumblr-square: "\f174";
+$fa-var-turkish-lira: "\f195";
+$fa-var-twitter: "\f099";
+$fa-var-twitter-square: "\f081";
+$fa-var-umbrella: "\f0e9";
+$fa-var-underline: "\f0cd";
+$fa-var-undo: "\f0e2";
+$fa-var-university: "\f19c";
+$fa-var-unlink: "\f127";
+$fa-var-unlock: "\f09c";
+$fa-var-unlock-alt: "\f13e";
+$fa-var-unsorted: "\f0dc";
+$fa-var-upload: "\f093";
+$fa-var-usd: "\f155";
+$fa-var-user: "\f007";
+$fa-var-user-md: "\f0f0";
+$fa-var-users: "\f0c0";
+$fa-var-video-camera: "\f03d";
+$fa-var-vimeo-square: "\f194";
+$fa-var-vine: "\f1ca";
+$fa-var-vk: "\f189";
+$fa-var-volume-down: "\f027";
+$fa-var-volume-off: "\f026";
+$fa-var-volume-up: "\f028";
+$fa-var-warning: "\f071";
+$fa-var-wechat: "\f1d7";
+$fa-var-weibo: "\f18a";
+$fa-var-weixin: "\f1d7";
+$fa-var-wheelchair: "\f193";
+$fa-var-windows: "\f17a";
+$fa-var-won: "\f159";
+$fa-var-wordpress: "\f19a";
+$fa-var-wrench: "\f0ad";
+$fa-var-xing: "\f168";
+$fa-var-xing-square: "\f169";
+$fa-var-yahoo: "\f19e";
+$fa-var-yen: "\f157";
+$fa-var-youtube: "\f167";
+$fa-var-youtube-play: "\f16a";
+$fa-var-youtube-square: "\f166";
+
+:@options{ :@has_childrenT:
+@linei:@children[ÿo:Sass::Tree::CommentNode:@silenti ;@:@lines[ :
+@loud0:@value"2/* Variables
+ * -------------------------- */;	i;
+[ o:Sass::Tree::VariableNode:
+@expro:Sass::Script::String	;@:
+@type:string;"../fonts;	i	:
+@name"fa-font-path;@:@guarded"!default;	i	;
+[ o;;i ;@;[ ;0;"/*$fa-font-path:        "//netdna.bootstrapcdn.com/font-awesome/4.1.0/fonts" !default; // for referencing Bootstrap CDN font files directly */;	i
+;
+[ o;;o;	;@;:identifier;"fa;	i;"fa-css-prefix;@;"!default;	i;
+[ o;;o;	;@;;;"
+4.1.0;	i;"fa-version;@;"!default;	i;
+[ o;;o:Sass::Script::Color	:@attrs{	:
+greeniî:	blueiî:rediî:
+alphai;@;0;	i;"fa-border-color;@;"!default;	i;
+[ o;;o;	;{	;iÿ;iÿ;iÿ;i;@;0;	i;"fa-inverse;@;"!default;	i;
+[ o;;o:Sass::Script::Operation
+:@operand2o:Sass::Script::Number:@original"14;@:@denominator_units[ ;i;	i:@numerator_units[ ;@:@operator:div:@operand1o; 
+;@;"[ ;i#;	i;#["em;	i;"fa-li-width;@;"!default;	i;
+[ o;;o;	;@;;;"
+\f042;	i;"fa-var-adjust;@;0;	i;
+[ o;;o;	;@;;;"
+\f170;	i;"fa-var-adn;@;0;	i;
+[ o;;o;	;@;;;"
+\f037;	i;"fa-var-align-center;@;0;	i;
+[ o;;o;	;@;;;"
+\f039;	i;"fa-var-align-justify;@;0;	i;
+[ o;;o;	;@;;;"
+\f036;	i;"fa-var-align-left;@;0;	i;
+[ o;;o;	;@;;;"
+\f038;	i;"fa-var-align-right;@;0;	i;
+[ o;;o;	;@;;;"
+\f0f9;	i;"fa-var-ambulance;@;0;	i;
+[ o;;o;	;@;;;"
+\f13d;	i;"fa-var-anchor;@;0;	i;
+[ o;;o;	;@;;;"
+\f17b;	i;"fa-var-android;@;0;	i;
+[ o;;o;	;@;;;"
+\f103;	i;"fa-var-angle-double-down;@;0;	i;
+[ o;;o;	;@;;;"
+\f100;	i;"fa-var-angle-double-left;@;0;	i;
+[ o;;o;	;@;;;"
+\f101;	i;"fa-var-angle-double-right;@;0;	i;
+[ o;;o;	;@;;;"
+\f102;	i;"fa-var-angle-double-up;@;0;	i;
+[ o;;o;	;@;;;"
+\f107;	i;"fa-var-angle-down;@;0;	i;
+[ o;;o;	;@;;;"
+\f104;	i;"fa-var-angle-left;@;0;	i;
+[ o;;o;	;@;;;"
+\f105;	i ;"fa-var-angle-right;@;0;	i ;
+[ o;;o;	;@;;;"
+\f106;	i!;"fa-var-angle-up;@;0;	i!;
+[ o;;o;	;@;;;"
+\f179;	i";"fa-var-apple;@;0;	i";
+[ o;;o;	;@;;;"
+\f187;	i#;"fa-var-archive;@;0;	i#;
+[ o;;o;	;@;;;"
+\f0ab;	i$;"fa-var-arrow-circle-down;@;0;	i$;
+[ o;;o;	;@;;;"
+\f0a8;	i%;"fa-var-arrow-circle-left;@;0;	i%;
+[ o;;o;	;@;;;"
+\f01a;	i&;"fa-var-arrow-circle-o-down;@;0;	i&;
+[ o;;o;	;@;;;"
+\f190;	i';"fa-var-arrow-circle-o-left;@;0;	i';
+[ o;;o;	;@;;;"
+\f18e;	i(;" fa-var-arrow-circle-o-right;@;0;	i(;
+[ o;;o;	;@;;;"
+\f01b;	i);"fa-var-arrow-circle-o-up;@;0;	i);
+[ o;;o;	;@;;;"
+\f0a9;	i*;"fa-var-arrow-circle-right;@;0;	i*;
+[ o;;o;	;@;;;"
+\f0aa;	i+;"fa-var-arrow-circle-up;@;0;	i+;
+[ o;;o;	;@;;;"
+\f063;	i,;"fa-var-arrow-down;@;0;	i,;
+[ o;;o;	;@;;;"
+\f060;	i-;"fa-var-arrow-left;@;0;	i-;
+[ o;;o;	;@;;;"
+\f061;	i.;"fa-var-arrow-right;@;0;	i.;
+[ o;;o;	;@;;;"
+\f062;	i/;"fa-var-arrow-up;@;0;	i/;
+[ o;;o;	;@;;;"
+\f047;	i0;"fa-var-arrows;@;0;	i0;
+[ o;;o;	;@;;;"
+\f0b2;	i1;"fa-var-arrows-alt;@;0;	i1;
+[ o;;o;	;@;;;"
+\f07e;	i2;"fa-var-arrows-h;@;0;	i2;
+[ o;;o;	;@;;;"
+\f07d;	i3;"fa-var-arrows-v;@;0;	i3;
+[ o;;o;	;@;;;"
+\f069;	i4;"fa-var-asterisk;@;0;	i4;
+[ o;;o;	;@;;;"
+\f1b9;	i5;"fa-var-automobile;@;0;	i5;
+[ o;;o;	;@;;;"
+\f04a;	i6;"fa-var-backward;@;0;	i6;
+[ o;;o;	;@;;;"
+\f05e;	i7;"fa-var-ban;@;0;	i7;
+[ o;;o;	;@;;;"
+\f19c;	i8;"fa-var-bank;@;0;	i8;
+[ o;;o;	;@;;;"
+\f080;	i9;"fa-var-bar-chart-o;@;0;	i9;
+[ o;;o;	;@;;;"
+\f02a;	i:;"fa-var-barcode;@;0;	i:;
+[ o;;o;	;@;;;"
+\f0c9;	i;;"fa-var-bars;@;0;	i;;
+[ o;;o;	;@;;;"
+\f0fc;	i<;"fa-var-beer;@;0;	i<;
+[ o;;o;	;@;;;"
+\f1b4;	i=;"fa-var-behance;@;0;	i=;
+[ o;;o;	;@;;;"
+\f1b5;	i>;"fa-var-behance-square;@;0;	i>;
+[ o;;o;	;@;;;"
+\f0f3;	i?;"fa-var-bell;@;0;	i?;
+[ o;;o;	;@;;;"
+\f0a2;	i@;"fa-var-bell-o;@;0;	i@;
+[ o;;o;	;@;;;"
+\f171;	iA;"fa-var-bitbucket;@;0;	iA;
+[ o;;o;	;@;;;"
+\f172;	iB;"fa-var-bitbucket-square;@;0;	iB;
+[ o;;o;	;@;;;"
+\f15a;	iC;"fa-var-bitcoin;@;0;	iC;
+[ o;;o;	;@;;;"
+\f032;	iD;"fa-var-bold;@;0;	iD;
+[ o;;o;	;@;;;"
+\f0e7;	iE;"fa-var-bolt;@;0;	iE;
+[ o;;o;	;@;;;"
+\f1e2;	iF;"fa-var-bomb;@;0;	iF;
+[ o;;o;	;@;;;"
+\f02d;	iG;"fa-var-book;@;0;	iG;
+[ o;;o;	;@;;;"
+\f02e;	iH;"fa-var-bookmark;@;0;	iH;
+[ o;;o;	;@;;;"
+\f097;	iI;"fa-var-bookmark-o;@;0;	iI;
+[ o;;o;	;@;;;"
+\f0b1;	iJ;"fa-var-briefcase;@;0;	iJ;
+[ o;;o;	;@;;;"
+\f15a;	iK;"fa-var-btc;@;0;	iK;
+[ o;;o;	;@;;;"
+\f188;	iL;"fa-var-bug;@;0;	iL;
+[ o;;o;	;@;;;"
+\f1ad;	iM;"fa-var-building;@;0;	iM;
+[ o;;o;	;@;;;"
+\f0f7;	iN;"fa-var-building-o;@;0;	iN;
+[ o;;o;	;@;;;"
+\f0a1;	iO;"fa-var-bullhorn;@;0;	iO;
+[ o;;o;	;@;;;"
+\f140;	iP;"fa-var-bullseye;@;0;	iP;
+[ o;;o;	;@;;;"
+\f1ba;	iQ;"fa-var-cab;@;0;	iQ;
+[ o;;o;	;@;;;"
+\f073;	iR;"fa-var-calendar;@;0;	iR;
+[ o;;o;	;@;;;"
+\f133;	iS;"fa-var-calendar-o;@;0;	iS;
+[ o;;o;	;@;;;"
+\f030;	iT;"fa-var-camera;@;0;	iT;
+[ o;;o;	;@;;;"
+\f083;	iU;"fa-var-camera-retro;@;0;	iU;
+[ o;;o;	;@;;;"
+\f1b9;	iV;"fa-var-car;@;0;	iV;
+[ o;;o;	;@;;;"
+\f0d7;	iW;"fa-var-caret-down;@;0;	iW;
+[ o;;o;	;@;;;"
+\f0d9;	iX;"fa-var-caret-left;@;0;	iX;
+[ o;;o;	;@;;;"
+\f0da;	iY;"fa-var-caret-right;@;0;	iY;
+[ o;;o;	;@;;;"
+\f150;	iZ;"fa-var-caret-square-o-down;@;0;	iZ;
+[ o;;o;	;@;;;"
+\f191;	i[;"fa-var-caret-square-o-left;@;0;	i[;
+[ o;;o;	;@;;;"
+\f152;	i\;" fa-var-caret-square-o-right;@;0;	i\;
+[ o;;o;	;@;;;"
+\f151;	i];"fa-var-caret-square-o-up;@;0;	i];
+[ o;;o;	;@;;;"
+\f0d8;	i^;"fa-var-caret-up;@;0;	i^;
+[ o;;o;	;@;;;"
+\f0a3;	i_;"fa-var-certificate;@;0;	i_;
+[ o;;o;	;@;;;"
+\f0c1;	i`;"fa-var-chain;@;0;	i`;
+[ o;;o;	;@;;;"
+\f127;	ia;"fa-var-chain-broken;@;0;	ia;
+[ o;;o;	;@;;;"
+\f00c;	ib;"fa-var-check;@;0;	ib;
+[ o;;o;	;@;;;"
+\f058;	ic;"fa-var-check-circle;@;0;	ic;
+[ o;;o;	;@;;;"
+\f05d;	id;"fa-var-check-circle-o;@;0;	id;
+[ o;;o;	;@;;;"
+\f14a;	ie;"fa-var-check-square;@;0;	ie;
+[ o;;o;	;@;;;"
+\f046;	if;"fa-var-check-square-o;@;0;	if;
+[ o;;o;	;@;;;"
+\f13a;	ig;"fa-var-chevron-circle-down;@;0;	ig;
+[ o;;o;	;@;;;"
+\f137;	ih;"fa-var-chevron-circle-left;@;0;	ih;
+[ o;;o;	;@;;;"
+\f138;	ii;" fa-var-chevron-circle-right;@;0;	ii;
+[ o;;o;	;@;;;"
+\f139;	ij;"fa-var-chevron-circle-up;@;0;	ij;
+[ o;;o;	;@;;;"
+\f078;	ik;"fa-var-chevron-down;@;0;	ik;
+[ o;;o;	;@;;;"
+\f053;	il;"fa-var-chevron-left;@;0;	il;
+[ o;;o;	;@;;;"
+\f054;	im;"fa-var-chevron-right;@;0;	im;
+[ o;;o;	;@;;;"
+\f077;	in;"fa-var-chevron-up;@;0;	in;
+[ o;;o;	;@;;;"
+\f1ae;	io;"fa-var-child;@;0;	io;
+[ o;;o;	;@;;;"
+\f111;	ip;"fa-var-circle;@;0;	ip;
+[ o;;o;	;@;;;"
+\f10c;	iq;"fa-var-circle-o;@;0;	iq;
+[ o;;o;	;@;;;"
+\f1ce;	ir;"fa-var-circle-o-notch;@;0;	ir;
+[ o;;o;	;@;;;"
+\f1db;	is;"fa-var-circle-thin;@;0;	is;
+[ o;;o;	;@;;;"
+\f0ea;	it;"fa-var-clipboard;@;0;	it;
+[ o;;o;	;@;;;"
+\f017;	iu;"fa-var-clock-o;@;0;	iu;
+[ o;;o;	;@;;;"
+\f0c2;	iv;"fa-var-cloud;@;0;	iv;
+[ o;;o;	;@;;;"
+\f0ed;	iw;"fa-var-cloud-download;@;0;	iw;
+[ o;;o;	;@;;;"
+\f0ee;	ix;"fa-var-cloud-upload;@;0;	ix;
+[ o;;o;	;@;;;"
+\f157;	iy;"fa-var-cny;@;0;	iy;
+[ o;;o;	;@;;;"
+\f121;	iz;"fa-var-code;@;0;	iz;
+[ o;;o;	;@;;;"
+\f126;	i{;"fa-var-code-fork;@;0;	i{;
+[ o;;o;	;@;;;"
+\f1cb;	i|;"fa-var-codepen;@;0;	i|;
+[ o;;o;	;@;;;"
+\f0f4;	i};"fa-var-coffee;@;0;	i};
+[ o;;o;	;@;;;"
+\f013;	i~;"fa-var-cog;@;0;	i~;
+[ o;;o;	;@;;;"
+\f085;	i;"fa-var-cogs;@;0;	i;
+[ o;;o;	;@;;;"
+\f0db;	i{;"fa-var-columns;@;0;	i{;
+[ o;;o;	;@;;;"
+\f075;	i|;"fa-var-comment;@;0;	i|;
+[ o;;o;	;@;;;"
+\f0e5;	i};"fa-var-comment-o;@;0;	i};
+[ o;;o;	;@;;;"
+\f086;	i~;"fa-var-comments;@;0;	i~;
+[ o;;o;	;@;;;"
+\f0e6;	i;"fa-var-comments-o;@;0;	i;
+[ o;;o;	;@;;;"
+\f14e;	i€;"fa-var-compass;@;0;	i€;
+[ o;;o;	;@;;;"
+\f066;	i;"fa-var-compress;@;0;	i;
+[ o;;o;	;@;;;"
+\f0c5;	i‚;"fa-var-copy;@;0;	i‚;
+[ o;;o;	;@;;;"
+\f09d;	iƒ;"fa-var-credit-card;@;0;	iƒ;
+[ o;;o;	;@;;;"
+\f125;	i„;"fa-var-crop;@;0;	i„;
+[ o;;o;	;@;;;"
+\f05b;	i…;"fa-var-crosshairs;@;0;	i…;
+[ o;;o;	;@;;;"
+\f13c;	i†;"fa-var-css3;@;0;	i†;
+[ o;;o;	;@;;;"
+\f1b2;	i‡;"fa-var-cube;@;0;	i‡;
+[ o;;o;	;@;;;"
+\f1b3;	iˆ;"fa-var-cubes;@;0;	iˆ;
+[ o;;o;	;@;;;"
+\f0c4;	i‰;"fa-var-cut;@;0;	i‰;
+[ o;;o;	;@;;;"
+\f0f5;	iŠ;"fa-var-cutlery;@;0;	iŠ;
+[ o;;o;	;@;;;"
+\f0e4;	i‹;"fa-var-dashboard;@;0;	i‹;
+[ o;;o;	;@;;;"
+\f1c0;	iŒ;"fa-var-database;@;0;	iŒ;
+[ o;;o;	;@;;;"
+\f03b;	i;"fa-var-dedent;@;0;	i;
+[ o;;o;	;@;;;"
+\f1a5;	i;"fa-var-delicious;@;0;	i;
+[ o;;o;	;@;;;"
+\f108;	i;"fa-var-desktop;@;0;	i;
+[ o;;o;	;@;;;"
+\f1bd;	i;"fa-var-deviantart;@;0;	i;
+[ o;;o;	;@;;;"
+\f1a6;	i‘;"fa-var-digg;@;0;	i‘;
+[ o;;o;	;@;;;"
+\f155;	i’;"fa-var-dollar;@;0;	i’;
+[ o;;o;	;@;;;"
+\f192;	i“;"fa-var-dot-circle-o;@;0;	i“;
+[ o;;o;	;@;;;"
+\f019;	i”;"fa-var-download;@;0;	i”;
+[ o;;o;	;@;;;"
+\f17d;	i•;"fa-var-dribbble;@;0;	i•;
+[ o;;o;	;@;;;"
+\f16b;	i–;"fa-var-dropbox;@;0;	i–;
+[ o;;o;	;@;;;"
+\f1a9;	i—;"fa-var-drupal;@;0;	i—;
+[ o;;o;	;@;;;"
+\f044;	i˜;"fa-var-edit;@;0;	i˜;
+[ o;;o;	;@;;;"
+\f052;	i™;"fa-var-eject;@;0;	i™;
+[ o;;o;	;@;;;"
+\f141;	iš;"fa-var-ellipsis-h;@;0;	iš;
+[ o;;o;	;@;;;"
+\f142;	i›;"fa-var-ellipsis-v;@;0;	i›;
+[ o;;o;	;@;;;"
+\f1d1;	iœ;"fa-var-empire;@;0;	iœ;
+[ o;;o;	;@;;;"
+\f0e0;	i;"fa-var-envelope;@;0;	i;
+[ o;;o;	;@;;;"
+\f003;	i;"fa-var-envelope-o;@;0;	i;
+[ o;;o;	;@;;;"
+\f199;	iŸ;"fa-var-envelope-square;@;0;	iŸ;
+[ o;;o;	;@;;;"
+\f12d;	i ;"fa-var-eraser;@;0;	i ;
+[ o;;o;	;@;;;"
+\f153;	i¡;"fa-var-eur;@;0;	i¡;
+[ o;;o;	;@;;;"
+\f153;	i¢;"fa-var-euro;@;0;	i¢;
+[ o;;o;	;@;;;"
+\f0ec;	i£;"fa-var-exchange;@;0;	i£;
+[ o;;o;	;@;;;"
+\f12a;	i¤;"fa-var-exclamation;@;0;	i¤;
+[ o;;o;	;@;;;"
+\f06a;	i¥;"fa-var-exclamation-circle;@;0;	i¥;
+[ o;;o;	;@;;;"
+\f071;	i¦;" fa-var-exclamation-triangle;@;0;	i¦;
+[ o;;o;	;@;;;"
+\f065;	i§;"fa-var-expand;@;0;	i§;
+[ o;;o;	;@;;;"
+\f08e;	i¨;"fa-var-external-link;@;0;	i¨;
+[ o;;o;	;@;;;"
+\f14c;	i©;" fa-var-external-link-square;@;0;	i©;
+[ o;;o;	;@;;;"
+\f06e;	iª;"fa-var-eye;@;0;	iª;
+[ o;;o;	;@;;;"
+\f070;	i«;"fa-var-eye-slash;@;0;	i«;
+[ o;;o;	;@;;;"
+\f09a;	i¬;"fa-var-facebook;@;0;	i¬;
+[ o;;o;	;@;;;"
+\f082;	i­;"fa-var-facebook-square;@;0;	i­;
+[ o;;o;	;@;;;"
+\f049;	i®;"fa-var-fast-backward;@;0;	i®;
+[ o;;o;	;@;;;"
+\f050;	i¯;"fa-var-fast-forward;@;0;	i¯;
+[ o;;o;	;@;;;"
+\f1ac;	i°;"fa-var-fax;@;0;	i°;
+[ o;;o;	;@;;;"
+\f182;	i±;"fa-var-female;@;0;	i±;
+[ o;;o;	;@;;;"
+\f0fb;	i²;"fa-var-fighter-jet;@;0;	i²;
+[ o;;o;	;@;;;"
+\f15b;	i³;"fa-var-file;@;0;	i³;
+[ o;;o;	;@;;;"
+\f1c6;	i´;"fa-var-file-archive-o;@;0;	i´;
+[ o;;o;	;@;;;"
+\f1c7;	iµ;"fa-var-file-audio-o;@;0;	iµ;
+[ o;;o;	;@;;;"
+\f1c9;	i¶;"fa-var-file-code-o;@;0;	i¶;
+[ o;;o;	;@;;;"
+\f1c3;	i·;"fa-var-file-excel-o;@;0;	i·;
+[ o;;o;	;@;;;"
+\f1c5;	i¸;"fa-var-file-image-o;@;0;	i¸;
+[ o;;o;	;@;;;"
+\f1c8;	i¹;"fa-var-file-movie-o;@;0;	i¹;
+[ o;;o;	;@;;;"
+\f016;	iº;"fa-var-file-o;@;0;	iº;
+[ o;;o;	;@;;;"
+\f1c1;	i»;"fa-var-file-pdf-o;@;0;	i»;
+[ o;;o;	;@;;;"
+\f1c5;	i¼;"fa-var-file-photo-o;@;0;	i¼;
+[ o;;o;	;@;;;"
+\f1c5;	i½;"fa-var-file-picture-o;@;0;	i½;
+[ o;;o;	;@;;;"
+\f1c4;	i¾;"fa-var-file-powerpoint-o;@;0;	i¾;
+[ o;;o;	;@;;;"
+\f1c7;	i¿;"fa-var-file-sound-o;@;0;	i¿;
+[ o;;o;	;@;;;"
+\f15c;	iÀ;"fa-var-file-text;@;0;	iÀ;
+[ o;;o;	;@;;;"
+\f0f6;	iÁ;"fa-var-file-text-o;@;0;	iÁ;
+[ o;;o;	;@;;;"
+\f1c8;	iÂ;"fa-var-file-video-o;@;0;	iÂ;
+[ o;;o;	;@;;;"
+\f1c2;	iÃ;"fa-var-file-word-o;@;0;	iÃ;
+[ o;;o;	;@;;;"
+\f1c6;	iÄ;"fa-var-file-zip-o;@;0;	iÄ;
+[ o;;o;	;@;;;"
+\f0c5;	iÅ;"fa-var-files-o;@;0;	iÅ;
+[ o;;o;	;@;;;"
+\f008;	iÆ;"fa-var-film;@;0;	iÆ;
+[ o;;o;	;@;;;"
+\f0b0;	iÇ;"fa-var-filter;@;0;	iÇ;
+[ o;;o;	;@;;;"
+\f06d;	iÈ;"fa-var-fire;@;0;	iÈ;
+[ o;;o;	;@;;;"
+\f134;	iÉ;"fa-var-fire-extinguisher;@;0;	iÉ;
+[ o;;o;	;@;;;"
+\f024;	iÊ;"fa-var-flag;@;0;	iÊ;
+[ o;;o;	;@;;;"
+\f11e;	iË;"fa-var-flag-checkered;@;0;	iË;
+[ o;;o;	;@;;;"
+\f11d;	iÌ;"fa-var-flag-o;@;0;	iÌ;
+[ o;;o;	;@;;;"
+\f0e7;	iÍ;"fa-var-flash;@;0;	iÍ;
+[ o;;o;	;@;;;"
+\f0c3;	iÎ;"fa-var-flask;@;0;	iÎ;
+[ o;;o;	;@;;;"
+\f16e;	iÏ;"fa-var-flickr;@;0;	iÏ;
+[ o;;o;	;@;;;"
+\f0c7;	iĞ;"fa-var-floppy-o;@;0;	iĞ;
+[ o;;o;	;@;;;"
+\f07b;	iÑ;"fa-var-folder;@;0;	iÑ;
+[ o;;o;	;@;;;"
+\f114;	iÒ;"fa-var-folder-o;@;0;	iÒ;
+[ o;;o;	;@;;;"
+\f07c;	iÓ;"fa-var-folder-open;@;0;	iÓ;
+[ o;;o;	;@;;;"
+\f115;	iÔ;"fa-var-folder-open-o;@;0;	iÔ;
+[ o;;o;	;@;;;"
+\f031;	iÕ;"fa-var-font;@;0;	iÕ;
+[ o;;o;	;@;;;"
+\f04e;	iÖ;"fa-var-forward;@;0;	iÖ;
+[ o;;o;	;@;;;"
+\f180;	i×;"fa-var-foursquare;@;0;	i×;
+[ o;;o;	;@;;;"
+\f119;	iØ;"fa-var-frown-o;@;0;	iØ;
+[ o;;o;	;@;;;"
+\f11b;	iÙ;"fa-var-gamepad;@;0;	iÙ;
+[ o;;o;	;@;;;"
+\f0e3;	iÚ;"fa-var-gavel;@;0;	iÚ;
+[ o;;o;	;@;;;"
+\f154;	iÛ;"fa-var-gbp;@;0;	iÛ;
+[ o;;o;	;@;;;"
+\f1d1;	iÜ;"fa-var-ge;@;0;	iÜ;
+[ o;;o;	;@;;;"
+\f013;	iİ;"fa-var-gear;@;0;	iİ;
+[ o;;o;	;@;;;"
+\f085;	iŞ;"fa-var-gears;@;0;	iŞ;
+[ o;;o;	;@;;;"
+\f06b;	iß;"fa-var-gift;@;0;	iß;
+[ o;;o;	;@;;;"
+\f1d3;	ià;"fa-var-git;@;0;	ià;
+[ o;;o;	;@;;;"
+\f1d2;	iá;"fa-var-git-square;@;0;	iá;
+[ o;;o;	;@;;;"
+\f09b;	iâ;"fa-var-github;@;0;	iâ;
+[ o;;o;	;@;;;"
+\f113;	iã;"fa-var-github-alt;@;0;	iã;
+[ o;;o;	;@;;;"
+\f092;	iä;"fa-var-github-square;@;0;	iä;
+[ o;;o;	;@;;;"
+\f184;	iå;"fa-var-gittip;@;0;	iå;
+[ o;;o;	;@;;;"
+\f000;	iæ;"fa-var-glass;@;0;	iæ;
+[ o;;o;	;@;;;"
+\f0ac;	iç;"fa-var-globe;@;0;	iç;
+[ o;;o;	;@;;;"
+\f1a0;	iè;"fa-var-google;@;0;	iè;
+[ o;;o;	;@;;;"
+\f0d5;	ié;"fa-var-google-plus;@;0;	ié;
+[ o;;o;	;@;;;"
+\f0d4;	iê;"fa-var-google-plus-square;@;0;	iê;
+[ o;;o;	;@;;;"
+\f19d;	ië;"fa-var-graduation-cap;@;0;	ië;
+[ o;;o;	;@;;;"
+\f0c0;	iì;"fa-var-group;@;0;	iì;
+[ o;;o;	;@;;;"
+\f0fd;	ií;"fa-var-h-square;@;0;	ií;
+[ o;;o;	;@;;;"
+\f1d4;	iî;"fa-var-hacker-news;@;0;	iî;
+[ o;;o;	;@;;;"
+\f0a7;	iï;"fa-var-hand-o-down;@;0;	iï;
+[ o;;o;	;@;;;"
+\f0a5;	iğ;"fa-var-hand-o-left;@;0;	iğ;
+[ o;;o;	;@;;;"
+\f0a4;	iñ;"fa-var-hand-o-right;@;0;	iñ;
+[ o;;o;	;@;;;"
+\f0a6;	iò;"fa-var-hand-o-up;@;0;	iò;
+[ o;;o;	;@;;;"
+\f0a0;	ió;"fa-var-hdd-o;@;0;	ió;
+[ o;;o;	;@;;;"
+\f1dc;	iô;"fa-var-header;@;0;	iô;
+[ o;;o;	;@;;;"
+\f025;	iõ;"fa-var-headphones;@;0;	iõ;
+[ o;;o;	;@;;;"
+\f004;	iö;"fa-var-heart;@;0;	iö;
+[ o;;o;	;@;;;"
+\f08a;	i÷;"fa-var-heart-o;@;0;	i÷;
+[ o;;o;	;@;;;"
+\f1da;	iø;"fa-var-history;@;0;	iø;
+[ o;;o;	;@;;;"
+\f015;	iù;"fa-var-home;@;0;	iù;
+[ o;;o;	;@;;;"
+\f0f8;	iú;"fa-var-hospital-o;@;0;	iú;
+[ o;;o;	;@;;;"
+\f13b;	iû;"fa-var-html5;@;0;	iû;
+[ o;;o;	;@;;;"
+\f03e;	iü;"fa-var-image;@;0;	iü;
+[ o;;o;	;@;;;"
+\f01c;	iı;"fa-var-inbox;@;0;	iı;
+[ o;;o;	;@;;;"
+\f03c;	iş;"fa-var-indent;@;0;	iş;
+[ o;;o;	;@;;;"
+\f129;	iÿ;"fa-var-info;@;0;	iÿ;
+[ o;;o;	;@;;;"
+\f05a;	i ;"fa-var-info-circle;@;0;	i ;
+[ o;;o;	;@;;;"
+\f156;	i;"fa-var-inr;@;0;	i;
+[ o;;o;	;@;;;"
+\f16d;	i;"fa-var-instagram;@;0;	i;
+[ o;;o;	;@;;;"
+\f19c;	i;"fa-var-institution;@;0;	i;
+[ o;;o;	;@;;;"
+\f033;	i;"fa-var-italic;@;0;	i;
+[ o;;o;	;@;;;"
+\f1aa;	i;"fa-var-joomla;@;0;	i;
+[ o;;o;	;@;;;"
+\f157;	i;"fa-var-jpy;@;0;	i;
+[ o;;o;	;@;;;"
+\f1cc;	i;"fa-var-jsfiddle;@;0;	i;
+[ o;;o;	;@;;;"
+\f084;	i;"fa-var-key;@;0;	i;
+[ o;;o;	;@;;;"
+\f11c;	i	;"fa-var-keyboard-o;@;0;	i	;
+[ o;;o;	;@;;;"
+\f159;	i
+;"fa-var-krw;@;0;	i
+;
+[ o;;o;	;@;;;"
+\f1ab;	i;"fa-var-language;@;0;	i;
+[ o;;o;	;@;;;"
+\f109;	i;"fa-var-laptop;@;0;	i;
+[ o;;o;	;@;;;"
+\f06c;	i;"fa-var-leaf;@;0;	i;
+[ o;;o;	;@;;;"
+\f0e3;	i;"fa-var-legal;@;0;	i;
+[ o;;o;	;@;;;"
+\f094;	i;"fa-var-lemon-o;@;0;	i;
+[ o;;o;	;@;;;"
+\f149;	i;"fa-var-level-down;@;0;	i;
+[ o;;o;	;@;;;"
+\f148;	i;"fa-var-level-up;@;0;	i;
+[ o;;o;	;@;;;"
+\f1cd;	i;"fa-var-life-bouy;@;0;	i;
+[ o;;o;	;@;;;"
+\f1cd;	i;"fa-var-life-ring;@;0;	i;
+[ o;;o;	;@;;;"
+\f1cd;	i;"fa-var-life-saver;@;0;	i;
+[ o;;o;	;@;;;"
+\f0eb;	i;"fa-var-lightbulb-o;@;0;	i;
+[ o;;o;	;@;;;"
+\f0c1;	i;"fa-var-link;@;0;	i;
+[ o;;o;	;@;;;"
+\f0e1;	i;"fa-var-linkedin;@;0;	i;
+[ o;;o;	;@;;;"
+\f08c;	i;"fa-var-linkedin-square;@;0;	i;
+[ o;;o;	;@;;;"
+\f17c;	i;"fa-var-linux;@;0;	i;
+[ o;;o;	;@;;;"
+\f03a;	i;"fa-var-list;@;0;	i;
+[ o;;o;	;@;;;"
+\f022;	i;"fa-var-list-alt;@;0;	i;
+[ o;;o;	;@;;;"
+\f0cb;	i;"fa-var-list-ol;@;0;	i;
+[ o;;o;	;@;;;"
+\f0ca;	i;"fa-var-list-ul;@;0;	i;
+[ o;;o;	;@;;;"
+\f124;	i;"fa-var-location-arrow;@;0;	i;
+[ o;;o;	;@;;;"
+\f023;	i;"fa-var-lock;@;0;	i;
+[ o;;o;	;@;;;"
+\f175;	i ;"fa-var-long-arrow-down;@;0;	i ;
+[ o;;o;	;@;;;"
+\f177;	i!;"fa-var-long-arrow-left;@;0;	i!;
+[ o;;o;	;@;;;"
+\f178;	i";"fa-var-long-arrow-right;@;0;	i";
+[ o;;o;	;@;;;"
+\f176;	i#;"fa-var-long-arrow-up;@;0;	i#;
+[ o;;o;	;@;;;"
+\f0d0;	i$;"fa-var-magic;@;0;	i$;
+[ o;;o;	;@;;;"
+\f076;	i%;"fa-var-magnet;@;0;	i%;
+[ o;;o;	;@;;;"
+\f064;	i&;"fa-var-mail-forward;@;0;	i&;
+[ o;;o;	;@;;;"
+\f112;	i';"fa-var-mail-reply;@;0;	i';
+[ o;;o;	;@;;;"
+\f122;	i(;"fa-var-mail-reply-all;@;0;	i(;
+[ o;;o;	;@;;;"
+\f183;	i);"fa-var-male;@;0;	i);
+[ o;;o;	;@;;;"
+\f041;	i*;"fa-var-map-marker;@;0;	i*;
+[ o;;o;	;@;;;"
+\f136;	i+;"fa-var-maxcdn;@;0;	i+;
+[ o;;o;	;@;;;"
+\f0fa;	i,;"fa-var-medkit;@;0;	i,;
+[ o;;o;	;@;;;"
+\f11a;	i-;"fa-var-meh-o;@;0;	i-;
+[ o;;o;	;@;;;"
+\f130;	i.;"fa-var-microphone;@;0;	i.;
+[ o;;o;	;@;;;"
+\f131;	i/;"fa-var-microphone-slash;@;0;	i/;
+[ o;;o;	;@;;;"
+\f068;	i0;"fa-var-minus;@;0;	i0;
+[ o;;o;	;@;;;"
+\f056;	i1;"fa-var-minus-circle;@;0;	i1;
+[ o;;o;	;@;;;"
+\f146;	i2;"fa-var-minus-square;@;0;	i2;
+[ o;;o;	;@;;;"
+\f147;	i3;"fa-var-minus-square-o;@;0;	i3;
+[ o;;o;	;@;;;"
+\f10b;	i4;"fa-var-mobile;@;0;	i4;
+[ o;;o;	;@;;;"
+\f10b;	i5;"fa-var-mobile-phone;@;0;	i5;
+[ o;;o;	;@;;;"
+\f0d6;	i6;"fa-var-money;@;0;	i6;
+[ o;;o;	;@;;;"
+\f186;	i7;"fa-var-moon-o;@;0;	i7;
+[ o;;o;	;@;;;"
+\f19d;	i8;"fa-var-mortar-board;@;0;	i8;
+[ o;;o;	;@;;;"
+\f001;	i9;"fa-var-music;@;0;	i9;
+[ o;;o;	;@;;;"
+\f0c9;	i:;"fa-var-navicon;@;0;	i:;
+[ o;;o;	;@;;;"
+\f19b;	i;;"fa-var-openid;@;0;	i;;
+[ o;;o;	;@;;;"
+\f03b;	i<;"fa-var-outdent;@;0;	i<;
+[ o;;o;	;@;;;"
+\f18c;	i=;"fa-var-pagelines;@;0;	i=;
+[ o;;o;	;@;;;"
+\f1d8;	i>;"fa-var-paper-plane;@;0;	i>;
+[ o;;o;	;@;;;"
+\f1d9;	i?;"fa-var-paper-plane-o;@;0;	i?;
+[ o;;o;	;@;;;"
+\f0c6;	i@;"fa-var-paperclip;@;0;	i@;
+[ o;;o;	;@;;;"
+\f1dd;	iA;"fa-var-paragraph;@;0;	iA;
+[ o;;o;	;@;;;"
+\f0ea;	iB;"fa-var-paste;@;0;	iB;
+[ o;;o;	;@;;;"
+\f04c;	iC;"fa-var-pause;@;0;	iC;
+[ o;;o;	;@;;;"
+\f1b0;	iD;"fa-var-paw;@;0;	iD;
+[ o;;o;	;@;;;"
+\f040;	iE;"fa-var-pencil;@;0;	iE;
+[ o;;o;	;@;;;"
+\f14b;	iF;"fa-var-pencil-square;@;0;	iF;
+[ o;;o;	;@;;;"
+\f044;	iG;"fa-var-pencil-square-o;@;0;	iG;
+[ o;;o;	;@;;;"
+\f095;	iH;"fa-var-phone;@;0;	iH;
+[ o;;o;	;@;;;"
+\f098;	iI;"fa-var-phone-square;@;0;	iI;
+[ o;;o;	;@;;;"
+\f03e;	iJ;"fa-var-photo;@;0;	iJ;
+[ o;;o;	;@;;;"
+\f03e;	iK;"fa-var-picture-o;@;0;	iK;
+[ o;;o;	;@;;;"
+\f1a7;	iL;"fa-var-pied-piper;@;0;	iL;
+[ o;;o;	;@;;;"
+\f1a8;	iM;"fa-var-pied-piper-alt;@;0;	iM;
+[ o;;o;	;@;;;"
+\f1a7;	iN;"fa-var-pied-piper-square;@;0;	iN;
+[ o;;o;	;@;;;"
+\f0d2;	iO;"fa-var-pinterest;@;0;	iO;
+[ o;;o;	;@;;;"
+\f0d3;	iP;"fa-var-pinterest-square;@;0;	iP;
+[ o;;o;	;@;;;"
+\f072;	iQ;"fa-var-plane;@;0;	iQ;
+[ o;;o;	;@;;;"
+\f04b;	iR;"fa-var-play;@;0;	iR;
+[ o;;o;	;@;;;"
+\f144;	iS;"fa-var-play-circle;@;0;	iS;
+[ o;;o;	;@;;;"
+\f01d;	iT;"fa-var-play-circle-o;@;0;	iT;
+[ o;;o;	;@;;;"
+\f067;	iU;"fa-var-plus;@;0;	iU;
+[ o;;o;	;@;;;"
+\f055;	iV;"fa-var-plus-circle;@;0;	iV;
+[ o;;o;	;@;;;"
+\f0fe;	iW;"fa-var-plus-square;@;0;	iW;
+[ o;;o;	;@;;;"
+\f196;	iX;"fa-var-plus-square-o;@;0;	iX;
+[ o;;o;	;@;;;"
+\f011;	iY;"fa-var-power-off;@;0;	iY;
+[ o;;o;	;@;;;"
+\f02f;	iZ;"fa-var-print;@;0;	iZ;
+[ o;;o;	;@;;;"
+\f12e;	i[;"fa-var-puzzle-piece;@;0;	i[;
+[ o;;o;	;@;;;"
+\f1d6;	i\;"fa-var-qq;@;0;	i\;
+[ o;;o;	;@;;;"
+\f029;	i];"fa-var-qrcode;@;0;	i];
+[ o;;o;	;@;;;"
+\f128;	i^;"fa-var-question;@;0;	i^;
+[ o;;o;	;@;;;"
+\f059;	i_;"fa-var-question-circle;@;0;	i_;
+[ o;;o;	;@;;;"
+\f10d;	i`;"fa-var-quote-left;@;0;	i`;
+[ o;;o;	;@;;;"
+\f10e;	ia;"fa-var-quote-right;@;0;	ia;
+[ o;;o;	;@;;;"
+\f1d0;	ib;"fa-var-ra;@;0;	ib;
+[ o;;o;	;@;;;"
+\f074;	ic;"fa-var-random;@;0;	ic;
+[ o;;o;	;@;;;"
+\f1d0;	id;"fa-var-rebel;@;0;	id;
+[ o;;o;	;@;;;"
+\f1b8;	ie;"fa-var-recycle;@;0;	ie;
+[ o;;o;	;@;;;"
+\f1a1;	if;"fa-var-reddit;@;0;	if;
+[ o;;o;	;@;;;"
+\f1a2;	ig;"fa-var-reddit-square;@;0;	ig;
+[ o;;o;	;@;;;"
+\f021;	ih;"fa-var-refresh;@;0;	ih;
+[ o;;o;	;@;;;"
+\f18b;	ii;"fa-var-renren;@;0;	ii;
+[ o;;o;	;@;;;"
+\f0c9;	ij;"fa-var-reorder;@;0;	ij;
+[ o;;o;	;@;;;"
+\f01e;	ik;"fa-var-repeat;@;0;	ik;
+[ o;;o;	;@;;;"
+\f112;	il;"fa-var-reply;@;0;	il;
+[ o;;o;	;@;;;"
+\f122;	im;"fa-var-reply-all;@;0;	im;
+[ o;;o;	;@;;;"
+\f079;	in;"fa-var-retweet;@;0;	in;
+[ o;;o;	;@;;;"
+\f157;	io;"fa-var-rmb;@;0;	io;
+[ o;;o;	;@;;;"
+\f018;	ip;"fa-var-road;@;0;	ip;
+[ o;;o;	;@;;;"
+\f135;	iq;"fa-var-rocket;@;0;	iq;
+[ o;;o;	;@;;;"
+\f0e2;	ir;"fa-var-rotate-left;@;0;	ir;
+[ o;;o;	;@;;;"
+\f01e;	is;"fa-var-rotate-right;@;0;	is;
+[ o;;o;	;@;;;"
+\f158;	it;"fa-var-rouble;@;0;	it;
+[ o;;o;	;@;;;"
+\f09e;	iu;"fa-var-rss;@;0;	iu;
+[ o;;o;	;@;;;"
+\f143;	iv;"fa-var-rss-square;@;0;	iv;
+[ o;;o;	;@;;;"
+\f158;	iw;"fa-var-rub;@;0;	iw;
+[ o;;o;	;@;;;"
+\f158;	ix;"fa-var-ruble;@;0;	ix;
+[ o;;o;	;@;;;"
+\f156;	iy;"fa-var-rupee;@;0;	iy;
+[ o;;o;	;@;;;"
+\f0c7;	iz;"fa-var-save;@;0;	iz;
+[ o;;o;	;@;;;"
+\f0c4;	i{;"fa-var-scissors;@;0;	i{;
+[ o;;o;	;@;;;"
+\f002;	i|;"fa-var-search;@;0;	i|;
+[ o;;o;	;@;;;"
+\f010;	i};"fa-var-search-minus;@;0;	i};
+[ o;;o;	;@;;;"
+\f00e;	i~;"fa-var-search-plus;@;0;	i~;
+[ o;;o;	;@;;;"
+\f1d8;	i;"fa-var-send;@;0;	i;
+[ o;;o;	;@;;;"
+\f1d9;	i€;"fa-var-send-o;@;0;	i€;
+[ o;;o;	;@;;;"
+\f064;	i;"fa-var-share;@;0;	i;
+[ o;;o;	;@;;;"
+\f1e0;	i‚;"fa-var-share-alt;@;0;	i‚;
+[ o;;o;	;@;;;"
+\f1e1;	iƒ;"fa-var-share-alt-square;@;0;	iƒ;
+[ o;;o;	;@;;;"
+\f14d;	i„;"fa-var-share-square;@;0;	i„;
+[ o;;o;	;@;;;"
+\f045;	i…;"fa-var-share-square-o;@;0;	i…;
+[ o;;o;	;@;;;"
+\f132;	i†;"fa-var-shield;@;0;	i†;
+[ o;;o;	;@;;;"
+\f07a;	i‡;"fa-var-shopping-cart;@;0;	i‡;
+[ o;;o;	;@;;;"
+\f090;	iˆ;"fa-var-sign-in;@;0;	iˆ;
+[ o;;o;	;@;;;"
+\f08b;	i‰;"fa-var-sign-out;@;0;	i‰;
+[ o;;o;	;@;;;"
+\f012;	iŠ;"fa-var-signal;@;0;	iŠ;
+[ o;;o;	;@;;;"
+\f0e8;	i‹;"fa-var-sitemap;@;0;	i‹;
+[ o;;o;	;@;;;"
+\f17e;	iŒ;"fa-var-skype;@;0;	iŒ;
+[ o;;o;	;@;;;"
+\f198;	i;"fa-var-slack;@;0;	i;
+[ o;;o;	;@;;;"
+\f1de;	i;"fa-var-sliders;@;0;	i;
+[ o;;o;	;@;;;"
+\f118;	i;"fa-var-smile-o;@;0;	i;
+[ o;;o;	;@;;;"
+\f0dc;	i;"fa-var-sort;@;0;	i;
+[ o;;o;	;@;;;"
+\f15d;	i‘;"fa-var-sort-alpha-asc;@;0;	i‘;
+[ o;;o;	;@;;;"
+\f15e;	i’;"fa-var-sort-alpha-desc;@;0;	i’;
+[ o;;o;	;@;;;"
+\f160;	i“;"fa-var-sort-amount-asc;@;0;	i“;
+[ o;;o;	;@;;;"
+\f161;	i”;"fa-var-sort-amount-desc;@;0;	i”;
+[ o;;o;	;@;;;"
+\f0de;	i•;"fa-var-sort-asc;@;0;	i•;
+[ o;;o;	;@;;;"
+\f0dd;	i–;"fa-var-sort-desc;@;0;	i–;
+[ o;;o;	;@;;;"
+\f0dd;	i—;"fa-var-sort-down;@;0;	i—;
+[ o;;o;	;@;;;"
+\f162;	i˜;"fa-var-sort-numeric-asc;@;0;	i˜;
+[ o;;o;	;@;;;"
+\f163;	i™;"fa-var-sort-numeric-desc;@;0;	i™;
+[ o;;o;	;@;;;"
+\f0de;	iš;"fa-var-sort-up;@;0;	iš;
+[ o;;o;	;@;;;"
+\f1be;	i›;"fa-var-soundcloud;@;0;	i›;
+[ o;;o;	;@;;;"
+\f197;	iœ;"fa-var-space-shuttle;@;0;	iœ;
+[ o;;o;	;@;;;"
+\f110;	i;"fa-var-spinner;@;0;	i;
+[ o;;o;	;@;;;"
+\f1b1;	i;"fa-var-spoon;@;0;	i;
+[ o;;o;	;@;;;"
+\f1bc;	iŸ;"fa-var-spotify;@;0;	iŸ;
+[ o;;o;	;@;;;"
+\f0c8;	i ;"fa-var-square;@;0;	i ;
+[ o;;o;	;@;;;"
+\f096;	i¡;"fa-var-square-o;@;0;	i¡;
+[ o;;o;	;@;;;"
+\f18d;	i¢;"fa-var-stack-exchange;@;0;	i¢;
+[ o;;o;	;@;;;"
+\f16c;	i£;"fa-var-stack-overflow;@;0;	i£;
+[ o;;o;	;@;;;"
+\f005;	i¤;"fa-var-star;@;0;	i¤;
+[ o;;o;	;@;;;"
+\f089;	i¥;"fa-var-star-half;@;0;	i¥;
+[ o;;o;	;@;;;"
+\f123;	i¦;"fa-var-star-half-empty;@;0;	i¦;
+[ o;;o;	;@;;;"
+\f123;	i§;"fa-var-star-half-full;@;0;	i§;
+[ o;;o;	;@;;;"
+\f123;	i¨;"fa-var-star-half-o;@;0;	i¨;
+[ o;;o;	;@;;;"
+\f006;	i©;"fa-var-star-o;@;0;	i©;
+[ o;;o;	;@;;;"
+\f1b6;	iª;"fa-var-steam;@;0;	iª;
+[ o;;o;	;@;;;"
+\f1b7;	i«;"fa-var-steam-square;@;0;	i«;
+[ o;;o;	;@;;;"
+\f048;	i¬;"fa-var-step-backward;@;0;	i¬;
+[ o;;o;	;@;;;"
+\f051;	i­;"fa-var-step-forward;@;0;	i­;
+[ o;;o;	;@;;;"
+\f0f1;	i®;"fa-var-stethoscope;@;0;	i®;
+[ o;;o;	;@;;;"
+\f04d;	i¯;"fa-var-stop;@;0;	i¯;
+[ o;;o;	;@;;;"
+\f0cc;	i°;"fa-var-strikethrough;@;0;	i°;
+[ o;;o;	;@;;;"
+\f1a4;	i±;"fa-var-stumbleupon;@;0;	i±;
+[ o;;o;	;@;;;"
+\f1a3;	i²;"fa-var-stumbleupon-circle;@;0;	i²;
+[ o;;o;	;@;;;"
+\f12c;	i³;"fa-var-subscript;@;0;	i³;
+[ o;;o;	;@;;;"
+\f0f2;	i´;"fa-var-suitcase;@;0;	i´;
+[ o;;o;	;@;;;"
+\f185;	iµ;"fa-var-sun-o;@;0;	iµ;
+[ o;;o;	;@;;;"
+\f12b;	i¶;"fa-var-superscript;@;0;	i¶;
+[ o;;o;	;@;;;"
+\f1cd;	i·;"fa-var-support;@;0;	i·;
+[ o;;o;	;@;;;"
+\f0ce;	i¸;"fa-var-table;@;0;	i¸;
+[ o;;o;	;@;;;"
+\f10a;	i¹;"fa-var-tablet;@;0;	i¹;
+[ o;;o;	;@;;;"
+\f0e4;	iº;"fa-var-tachometer;@;0;	iº;
+[ o;;o;	;@;;;"
+\f02b;	i»;"fa-var-tag;@;0;	i»;
+[ o;;o;	;@;;;"
+\f02c;	i¼;"fa-var-tags;@;0;	i¼;
+[ o;;o;	;@;;;"
+\f0ae;	i½;"fa-var-tasks;@;0;	i½;
+[ o;;o;	;@;;;"
+\f1ba;	i¾;"fa-var-taxi;@;0;	i¾;
+[ o;;o;	;@;;;"
+\f1d5;	i¿;"fa-var-tencent-weibo;@;0;	i¿;
+[ o;;o;	;@;;;"
+\f120;	iÀ;"fa-var-terminal;@;0;	iÀ;
+[ o;;o;	;@;;;"
+\f034;	iÁ;"fa-var-text-height;@;0;	iÁ;
+[ o;;o;	;@;;;"
+\f035;	iÂ;"fa-var-text-width;@;0;	iÂ;
+[ o;;o;	;@;;;"
+\f00a;	iÃ;"fa-var-th;@;0;	iÃ;
+[ o;;o;	;@;;;"
+\f009;	iÄ;"fa-var-th-large;@;0;	iÄ;
+[ o;;o;	;@;;;"
+\f00b;	iÅ;"fa-var-th-list;@;0;	iÅ;
+[ o;;o;	;@;;;"
+\f08d;	iÆ;"fa-var-thumb-tack;@;0;	iÆ;
+[ o;;o;	;@;;;"
+\f165;	iÇ;"fa-var-thumbs-down;@;0;	iÇ;
+[ o;;o;	;@;;;"
+\f088;	iÈ;"fa-var-thumbs-o-down;@;0;	iÈ;
+[ o;;o;	;@;;;"
+\f087;	iÉ;"fa-var-thumbs-o-up;@;0;	iÉ;
+[ o;;o;	;@;;;"
+\f164;	iÊ;"fa-var-thumbs-up;@;0;	iÊ;
+[ o;;o;	;@;;;"
+\f145;	iË;"fa-var-ticket;@;0;	iË;
+[ o;;o;	;@;;;"
+\f00d;	iÌ;"fa-var-times;@;0;	iÌ;
+[ o;;o;	;@;;;"
+\f057;	iÍ;"fa-var-times-circle;@;0;	iÍ;
+[ o;;o;	;@;;;"
+\f05c;	iÎ;"fa-var-times-circle-o;@;0;	iÎ;
+[ o;;o;	;@;;;"
+\f043;	iÏ;"fa-var-tint;@;0;	iÏ;
+[ o;;o;	;@;;;"
+\f150;	iĞ;"fa-var-toggle-down;@;0;	iĞ;
+[ o;;o;	;@;;;"
+\f191;	iÑ;"fa-var-toggle-left;@;0;	iÑ;
+[ o;;o;	;@;;;"
+\f152;	iÒ;"fa-var-toggle-right;@;0;	iÒ;
+[ o;;o;	;@;;;"
+\f151;	iÓ;"fa-var-toggle-up;@;0;	iÓ;
+[ o;;o;	;@;;;"
+\f014;	iÔ;"fa-var-trash-o;@;0;	iÔ;
+[ o;;o;	;@;;;"
+\f1bb;	iÕ;"fa-var-tree;@;0;	iÕ;
+[ o;;o;	;@;;;"
+\f181;	iÖ;"fa-var-trello;@;0;	iÖ;
+[ o;;o;	;@;;;"
+\f091;	i×;"fa-var-trophy;@;0;	i×;
+[ o;;o;	;@;;;"
+\f0d1;	iØ;"fa-var-truck;@;0;	iØ;
+[ o;;o;	;@;;;"
+\f195;	iÙ;"fa-var-try;@;0;	iÙ;
+[ o;;o;	;@;;;"
+\f173;	iÚ;"fa-var-tumblr;@;0;	iÚ;
+[ o;;o;	;@;;;"
+\f174;	iÛ;"fa-var-tumblr-square;@;0;	iÛ;
+[ o;;o;	;@;;;"
+\f195;	iÜ;"fa-var-turkish-lira;@;0;	iÜ;
+[ o;;o;	;@;;;"
+\f099;	iİ;"fa-var-twitter;@;0;	iİ;
+[ o;;o;	;@;;;"
+\f081;	iŞ;"fa-var-twitter-square;@;0;	iŞ;
+[ o;;o;	;@;;;"
+\f0e9;	iß;"fa-var-umbrella;@;0;	iß;
+[ o;;o;	;@;;;"
+\f0cd;	ià;"fa-var-underline;@;0;	ià;
+[ o;;o;	;@;;;"
+\f0e2;	iá;"fa-var-undo;@;0;	iá;
+[ o;;o;	;@;;;"
+\f19c;	iâ;"fa-var-university;@;0;	iâ;
+[ o;;o;	;@;;;"
+\f127;	iã;"fa-var-unlink;@;0;	iã;
+[ o;;o;	;@;;;"
+\f09c;	iä;"fa-var-unlock;@;0;	iä;
+[ o;;o;	;@;;;"
+\f13e;	iå;"fa-var-unlock-alt;@;0;	iå;
+[ o;;o;	;@;;;"
+\f0dc;	iæ;"fa-var-unsorted;@;0;	iæ;
+[ o;;o;	;@;;;"
+\f093;	iç;"fa-var-upload;@;0;	iç;
+[ o;;o;	;@;;;"
+\f155;	iè;"fa-var-usd;@;0;	iè;
+[ o;;o;	;@;;;"
+\f007;	ié;"fa-var-user;@;0;	ié;
+[ o;;o;	;@;;;"
+\f0f0;	iê;"fa-var-user-md;@;0;	iê;
+[ o;;o;	;@;;;"
+\f0c0;	ië;"fa-var-users;@;0;	ië;
+[ o;;o;	;@;;;"
+\f03d;	iì;"fa-var-video-camera;@;0;	iì;
+[ o;;o;	;@;;;"
+\f194;	ií;"fa-var-vimeo-square;@;0;	ií;
+[ o;;o;	;@;;;"
+\f1ca;	iî;"fa-var-vine;@;0;	iî;
+[ o;;o;	;@;;;"
+\f189;	iï;"fa-var-vk;@;0;	iï;
+[ o;;o;	;@;;;"
+\f027;	iğ;"fa-var-volume-down;@;0;	iğ;
+[ o;;o;	;@;;;"
+\f026;	iñ;"fa-var-volume-off;@;0;	iñ;
+[ o;;o;	;@;;;"
+\f028;	iò;"fa-var-volume-up;@;0;	iò;
+[ o;;o;	;@;;;"
+\f071;	ió;"fa-var-warning;@;0;	ió;
+[ o;;o;	;@;;;"
+\f1d7;	iô;"fa-var-wechat;@;0;	iô;
+[ o;;o;	;@;;;"
+\f18a;	iõ;"fa-var-weibo;@;0;	iõ;
+[ o;;o;	;@;;;"
+\f1d7;	iö;"fa-var-weixin;@;0;	iö;
+[ o;;o;	;@;;;"
+\f193;	i÷;"fa-var-wheelchair;@;0;	i÷;
+[ o;;o;	;@;;;"
+\f17a;	iø;"fa-var-windows;@;0;	iø;
+[ o;;o;	;@;;;"
+\f159;	iù;"fa-var-won;@;0;	iù;
+[ o;;o;	;@;;;"
+\f19a;	iú;"fa-var-wordpress;@;0;	iú;
+[ o;;o;	;@;;;"
+\f0ad;	iû;"fa-var-wrench;@;0;	iû;
+[ o;;o;	;@;;;"
+\f168;	iü;"fa-var-xing;@;0;	iü;
+[ o;;o;	;@;;;"
+\f169;	iı;"fa-var-xing-square;@;0;	iı;
+[ o;;o;	;@;;;"
+\f19e;	iş;"fa-var-yahoo;@;0;	iş;
+[ o;;o;	;@;;;"
+\f157;	iÿ;"fa-var-yen;@;0;	iÿ;
+[ o;;o;	;@;;;"
+\f167;	i ;"fa-var-youtube;@;0;	i ;
+[ o;;o;	;@;;;"
+\f16a;	i;"fa-var-youtube-play;@;0;	i;
+[ o;;o;	;@;;;"
+\f166;	i;"fa-var-youtube-square;@;0;	i;
+[ 

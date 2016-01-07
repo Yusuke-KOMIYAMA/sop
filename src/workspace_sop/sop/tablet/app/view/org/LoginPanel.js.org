@@ -1,0 +1,55 @@
+/**
+ * ログインパネル
+ */
+Ext.define(
+    'tablet.view.LoginPanel', {
+        extend: 'Ext.Panel',
+        xtype: 'login-panel',
+
+        config: {
+            fullscreen: true,
+            layout: 'fit',
+            items: [{
+                xtype: 'formpanel',
+                scrollable: false,
+                height: '100%',
+                submitOnAction: true,
+                layout: {
+                    type: 'vbox',
+                    align: 'center',
+                    pack: 'center'
+                },
+                items: [{
+                    xtype: 'fieldset',
+                    title: 'ようこそ',
+                    defaults: {
+                        labelWidth: 130,
+                        width: 330
+                    },
+                    items: [{
+                        xtype: 'textfield',
+                        itemId: 'user_id',
+                        name: 'user_id',
+                        label: '<span style="font-size:80%;">ユーザーID</span>'
+                    }, {
+                        xtype: 'passwordfield',
+                        itemId: 'password',
+                        name: 'password',
+                        label: '<span style="font-size:80%;">パスワード</span>'
+                    }, {
+                        itemId: 'sso_field',
+                        xtype: 'panel',
+                        html: '<div style="text-align:center">シングル・サインオンでログインします</div>',
+                        hidden: true
+                    }]
+                }, {
+                    xtype: 'button',
+                    itemId: 'login_btn',
+                    text: 'Log In',
+                    ui: 'round',
+                    margin: 5
+                }]
+            }]
+        }
+    }
+);

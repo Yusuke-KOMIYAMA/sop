@@ -1,0 +1,69 @@
+/**
+ * テンプレート
+ */
+Ext.define(
+    'sop.model.Tpl', {
+        extend: 'Ext.data.Model',
+        fields: [{
+            name: 'grp_id',
+            type: 'int'
+        }, {
+            name: 'pj_id',
+            type: 'int'
+        }, {
+            name: 'pj_name',
+            type: 'string'
+        }, {
+            name: 'sop_id',
+            type: 'int'
+        }, {
+            name: 'sop_name',
+            type: 'string'
+        }, {
+            name: 'sop_name_en',
+            type: 'string'
+        }, {
+            name: 'tpl_id',
+            type: 'int'
+        }, {
+            name: 'tpl_name',
+            type: 'string'
+        }, {
+            name: 'latest_flg',
+            type: 'int'
+        }, {
+            name: 'aprv_flg',
+            type: 'int'
+        }, {
+            name: 'upld_date',
+            type: 'date'
+        }, {
+            name: 'upld_user',
+            type: 'string'
+        }, {
+            name: 'upld_cmnt',
+            type: 'string'
+        }, {
+            name: 'aprv_date',
+            type: 'date'
+        }, {
+            name: 'aprv_user',
+            type: 'string'
+        }, {
+            name: 'aprv_cmnt',
+            type: 'string'
+        }, {
+            name: 'rtn_date',
+            type: 'date'
+        }, {
+            name: 'rtn_user',
+            type: 'string'
+        }, {
+            name: 'rtn_cmnt',
+            type: 'string'
+        }, {
+            name: 'revision_no',
+            type: 'string'
+        }]
+    }
+);

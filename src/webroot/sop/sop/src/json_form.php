@@ -1,0 +1,56 @@
+<?php
+include_once(__DIR__."/login_check.php");
+include_once(__DIR__."/config.php");
+include_once(__DIR__."/db_common.php");
+
+/**
+ * プロジェクト一覧取得
+ */
+$db = createDBConnection();
+
+// ---------------------------
+// parameters 取得
+// ---------------------------
+$grp_id    = \Sop\Session::getSiteData('grp_id');
+$role_aprv = \Sop\Session::getSiteData('role_aprv');
+$role_upld = \Sop\Session::getSiteData('role_upld');
+$role_user = \Sop\Session::getSiteData('role_user');
+$user_id   = \Sop\Session::getSiteData('user_id');
+
+$tpl_id = (array_key_exists('tpl_id', $_REQUEST)) ? $_REQUEST['tpl_id'] : '';
+
+if($tpl_id == '' || $tpl_id == NULL){
+
+}
+
+// ---------------------------
+// データ取得
+// ---------------------------
+$form_list = array();
+
+$sql = getSQLBaseForFormList();
+$sql .= " AND form.tpl_id = :tpl_id";
+
+$params = array();
+$params[':tpl_id'] = $tpl_id;
+
+$stmt = $db->prepare($sql);
+$stmt->execute($params);
+
+foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+{
+    array_push($form_list, $row);
+}
+
+$count = count($form_list);
+
+// ---------------------------
+// 終了処理
+// ---------------------------
+header("Content-Type: text/json");
+$msg001 = "The system succeeded in an accession to the data."; // データの取得に成功しました
+echo json_encode(
+    array('success' => true,
+          'msg'     => \Sop\Api::htmlEncodeLines(array($msg001)),
+          'root'    => \Sop\Api::htmlEncode($form_list),
+          'total'   => $count));

@@ -1,0 +1,6 @@
+Options -Indexes
+
+php_value upload_max_filesize 1G
+php_value post_max_size 1G
+# 600 seconds (10 minutes)
+php_value max_input_time 600

@@ -1,0 +1,66 @@
+<?php
+include_once(__DIR__."/login_check.php");
+include_once(__DIR__."/config.php");
+include_once(__DIR__."/../../src/db_common.php");
+
+/**
+ * SOP 承認待ち標準作業手順書一覧
+ */
+$db = createDBConnection();
+
+// ---------------------
+// parameters 取得
+// ---------------------
+$grp_id  = \Sop\Session::getSiteData('grp_id');
+$user_id = \Sop\Session::getSiteData('user_id');
+
+$start = (array_key_exists('start', $_REQUEST)) ? intval($_REQUEST['start']) : 0;
+$limit = (array_key_exists('limit', $_REQUEST)) ? intval($_REQUEST['limit']) : 25;
+
+// ---------------------
+// データ取得
+// ---------------------
+$sel_sql = getSQLBaseForFileList();
+$sel_sql .= " AND v_schema.grp_id = :grp_id AND fix_user = :fix_user AND fix_date IS NULL AND provisional_fix_date IS NOT NULL";
+
+$params = array();
+$params[':grp_id'] = $grp_id;
+$params[':fix_user'] = $user_id;
+
+// --- 件数取得
+$sql = "SELECT count(*) cnt FROM ($sel_sql) as tmp";
+
+$stmt = $db->prepare($sql);
+$stmt->execute($params);
+
+$cnt = 0;
+foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row){
+    $cnt = (int)$row['cnt'];
+}
+
+// --- データ取得
+$sql = $sel_sql;
+$sql .= " ORDER BY file.smpl_given_no, v_schema.sop_name, file.fix_date ASC LIMIT $limit OFFSET $start ";
+
+$stmt = $db->prepare($sql);
+$stmt->execute($params);
+
+$sop_list = array();
+foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+{
+    $sop = $row;
+    array_push($sop_list, $sop);
+}
+
+// ---------------------
+// 出力
+// ---------------------
+$db = null;
+
+header("Content-type:application/json; charset=utf-8");
+echo json_encode(
+    array('success' => true,
+          'msg'     => \Sop\Api::htmlEncodeLines(array('データの取得に成功しました')),
+          'root'    => \Sop\Api::htmlEncode($sop_list),
+          'total'   => $cnt));
+exit;

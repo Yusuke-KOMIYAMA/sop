@@ -1,0 +1,25 @@
+database_dsn: mysql:dbname=sop_db;host=localhost
+database_user: sop
+database_password: sop
+
+session_name: SOP_PHPSESSID
+session_lifetime: 1800
+session_path: /
+session_cookie_secure: false
+
+use_sso: false
+debug_pseudo_sso: false
+debug_pseudo_sso_user: muser111
+
+oauth2_client_id: xxxxxxxx
+oauth2_client_secret: xxxxxxxx
+oauth2_redirect_uri: http://xxxxx.com/sop/sso/callback
+oauth2_authorization_endpoint: http://yyyyy.com:18080/openam/oauth2/authorize
+oauth2_token_endpoint: http://yyyyy.com:18080/openam/oauth2/access_token
+oauth2_user_info_endpoint: http://yyyyy.com:18080/openam/oauth2/userinfo
+oauth2_logout_uri: http://xxxxx.com/sop/sso/logout
+
+header_home_button_url: http://xxxxx.com
+
+footer: Standar Operating Procedure
+system_version: 2.0.6

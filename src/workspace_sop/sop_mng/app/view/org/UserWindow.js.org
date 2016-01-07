@@ -1,0 +1,121 @@
+/**
+ * ユーザー 登録編集 Window
+ */
+Ext.define(
+    "sop_mng.view.UserWindow", {
+        extend: 'Ext.window.Window',
+        xtype: 'user-window',
+
+        title: '',
+        width: 500,
+        height: 520,
+        bodyPadding: 10,
+        closable: false,
+        modal: true,
+
+        layout: {
+            type: 'fit'
+        },
+        items: [{
+            xtype: 'form',
+            itemId: 'user_form',
+
+            autoScroll: true,
+            bodyPadding: 10,
+            defaults: {
+                labelWidth: 110,
+                width: 450,
+                margin: '0 0 10 0'
+            },
+            items: [{
+                xtype: 'hidden',
+                itemId: 'div',
+                name: 'div',
+                value: ''
+            }, {
+                xtype: 'textfield',
+                itemId: 'user_id',
+                name: 'user_id',
+                fieldLabel: 'ユーザーID',
+                allowBlank: false,
+                msgTarget: 'side'
+            }, {
+                xtype: 'textfield',
+                itemId: 'password',
+                name: 'password',
+                fieldLabel: 'パスワード',
+                allowBlank: false,
+                msgTarget: 'side',
+                inputType: 'password'
+            }, {
+                xtype: 'textfield',
+                itemId: 'user_name',
+                name: 'user_name',
+                fieldLabel: 'ユーザー名',
+                msgTarget: 'side'
+            }, {
+                xtype: 'checkboxgroup',
+                fieldLabel: '権限',
+                columns: 4,
+                vertical: true,
+                allowBlank: false,
+                msgTarget: 'side',
+                items: [{
+                    itemId: 'role_aprv',
+                    name: 'role_aprv',
+                    boxLabel: '承認'
+                }, {
+                    itemId: 'role_upld',
+                    name: 'role_upld',
+                    boxLabel: '登録'
+                }, {
+                    itemId: 'role_user',
+                    name: 'role_user',
+                    boxLabel: '一般'
+                }, {
+                    itemId: 'admin_flag',
+                    name: 'admin_flag',
+                    boxLabel: '管理'
+                }]
+            }, {
+                xtype: 'combobox',
+                itemId: 'grp_name',
+                name: 'grp_name',
+                fieldLabel: '所属グループ',
+                store: 'GrpStore',
+                displayField: 'grp_name',
+                valueField: 'grp_name',
+                allowBlank: false,
+                msgTarget: 'side',
+
+                displayTpl: Ext.create('Ext.XTemplate',
+                    '<tpl for=".">',
+                    '{grp_name:htmlDecode}',
+                    '</tpl>'
+                )
+            }, {
+                xtype: 'textfield',
+                itemId: 'email',
+                name: 'email',
+                fieldLabel: 'メールアドレス',
+                msgTarget: 'side',
+                vtype: 'email'
+            }, {
+                xtype: 'textarea',
+                itemId: 'note',
+                name: 'note',
+                fieldLabel: '備考'
+            }]
+        }],
+
+        buttonAlign: 'center',
+        buttons: [{
+            itemId: 'user_submit_btn',
+            text: '送信',
+            formBind: true
+        }, {
+            itemId: 'user_cancel_btn',
+            text: 'キャンセル'
+        }]
+    }
+);

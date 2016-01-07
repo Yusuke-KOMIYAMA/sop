@@ -1,0 +1,64 @@
+<?php
+include_once(__DIR__."/login_check.php");
+include_once(__DIR__."/config.php");
+include_once(__DIR__."/../../src/db_common.php");
+
+/**
+ * プロジェクト一覧
+ */
+$db = createDBConnection();
+
+// ---------------------
+// parameters 取得
+// ---------------------
+$grp_id  = \Sop\Session::getSiteData('grp_id');
+$user_id = \Sop\Session::getSiteData('user_id');
+
+$start = (array_key_exists('start', $_REQUEST)) ? intval($_REQUEST['start']) : 0;
+$limit = (array_key_exists('limit', $_REQUEST)) ? intval($_REQUEST['limit']) : 25;
+
+// ---------------------
+// データ取得
+// ---------------------
+$sel_sql = getSQLBaseForPjList();
+$sel_sql .= " AND grp_pj.grp_id = :grp_id";
+
+$params = array();
+$params[':grp_id'] = $grp_id;
+
+// --- 件数取得
+$sql = "SELECT count(*) cnt FROM ($sel_sql) as tmp";
+
+$stmt = $db->prepare($sql);
+$stmt->execute($params);
+
+$cnt = 0;
+foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row){
+    $cnt = (int)$row['cnt'];
+}
+
+// --- データ取得
+$sql = $sel_sql;
+$sql .= " ORDER BY pj.pj_id ASC LIMIT $limit OFFSET $start ";
+
+$stmt = $db->prepare($sql);
+$stmt->execute($params);
+
+$pj_list = array();
+foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row){
+    array_push($pj_list, $row);
+}
+
+// ---------------------
+// 出力
+// ---------------------
+$db = null;
+
+header("Content-type:application/json; charset=utf-8");
+echo json_encode(
+    array(
+        'success' => true,
+        'msg'     => \Sop\Api::htmlEncodeLines(array('データの取得に成功しました')),
+        'root'    => \Sop\Api::htmlEncode($pj_list),
+        'total'   => $cnt));
+exit;

@@ -1,0 +1,19 @@
+Ext.define('sop.common.Utilities', {
+    statics: {
+        showSessionExpiredError: function() {
+            Ext.Msg.alert('Failure',
+                          '自動ログアウト済みです。もう一度ログインしてください。',
+                          function() {
+                              location.reload();
+                          });
+        },
+
+        showFailureResponse: function(response) {
+            if (response.session_expired) {
+                sop.common.Utilities.showSessionExpiredError();
+            } else {
+                Ext.Msg.alert('Failure', response.msg);
+            }
+        }
+    }
+});

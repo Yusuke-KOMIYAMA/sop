@@ -1,0 +1,97 @@
+<?php
+
+namespace Sop;
+
+class SingleSignOn
+{
+    public static function getConfig()
+    {
+        return array(
+            'client_info' => array(
+                'client_id' => Config::get('oauth2_client_id'),
+                'redirect_uri' => Config::get('oauth2_redirect_uri'),
+
+                'authorization_endpoint' => Config::get('oauth2_authorization_endpoint'),
+                'token_endpoint' => Config::get('oauth2_token_endpoint'),
+                'user_info_endpoint' => Config::get('oauth2_user_info_endpoint'),
+
+                'authentication_info' => array(
+                    'method' => 'client_secret_post',
+                    'params' => array(
+                        'client_secret' => Config::get('oauth2_client_secret'),
+                    )
+                )
+            )
+        );
+    }
+
+    /**
+     * ユーザーが0件のときに初期ユーザーを登録する。
+     *
+     * @param array $userInfo
+     */
+    public static function registerInitialUser($userInfo) {
+        if (!isset($userInfo['sub'])) {
+            return;
+        }
+
+        $user_id = $userInfo['sub'];
+
+        $row = \R::getRow('SELECT COUNT(user_id) AS count FROM user');
+        if ($row['count'] == 0) {
+            \R::exec('INSERT INTO `grp` (`grp_name`) VALUES (?)', array('管理グループ'));
+            \R::exec('INSERT INTO `user` (`user_id`, `user_name`, `password`, `role`, `admin_flag`) VALUES (?, ?, ?, ?, ?)',
+                     array($user_id, '', '', '000', 1));
+            \R::exec('INSERT INTO `user_grp` (`user_id`, `grp_id`) VALUES (?, ?)', array($user_id, 1));
+        }
+    }
+
+    /**
+     * シングル・サインオンの結果を元にDBのユーザ情報を更新する。
+     *
+     * @param array $userInfo
+     */
+    public static function updateUserData($userInfo) {
+        // userInfoは以下のデータを含む
+        //
+        // [
+        //     sub         => iit0001,
+        //     updated_at  => 1424903837,
+        //     email       => tekezo@iit.jp,
+        //     name        => iit0001,
+        //     family_name => Takayama,
+        //     given_name  => Fumihiko,
+        // ]
+
+        if (!isset($userInfo['sub'])) {
+            return;
+        }
+
+        $user_id = $userInfo['sub'];
+
+        $updates = array();
+        $params = array(
+            ':user_id' => $user_id,
+        );
+
+        if (isset($userInfo['email'])) {
+            $updates[] = 'email = :email';
+            $params[':email'] = $userInfo['email'];
+        }
+
+        $user_name =
+            (isset($userInfo['family_name']) ? $userInfo['family_name'] : '')
+            . ' ' .
+            (isset($userInfo['given_name']) ? $userInfo['given_name'] : '');
+        $user_name = trim($user_name);
+        if ($user_name) {
+            $updates[] = 'user_name = :user_name';
+            $params[':user_name'] = $user_name;
+        }
+
+        if (! empty($updates)) {
+            $sql = 'UPDATE user SET ' . join(',', $updates) . ' WHERE user_id = :user_id';
+            \R::exec($sql, $params);
+        }
+    }
+}

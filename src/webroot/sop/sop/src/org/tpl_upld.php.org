@@ -1,0 +1,472 @@
+<?php
+include_once(__DIR__."/login_check.php");
+include_once(__DIR__."/config.php");
+include_once(__DIR__."/db_common.php");
+
+\Sop\Database::setupRedBean();
+
+/**
+ * テンプレート アップロード
+ */
+$db = createDBConnection();
+
+// ---------------------------
+// parameters 取得
+// ---------------------------
+$grp_id    = \Sop\Session::getSiteData('grp_id');
+$role_aprv = \Sop\Session::getSiteData('role_aprv');
+$role_upld = \Sop\Session::getSiteData('role_upld');
+$role_user = \Sop\Session::getSiteData('role_user');
+$user_id   = \Sop\Session::getSiteData('user_id');
+
+$pj_id = (array_key_exists('pj_id', $_REQUEST)) ? str_replace('pj_', '', $_REQUEST['pj_id']) : '';
+$sop_id = (array_key_exists('sop_id', $_REQUEST)) ? str_replace('sop_', '', $_REQUEST['sop_id']) : '';
+$schema_type = (array_key_exists('schema_type', $_REQUEST) ? $_REQUEST['schema_type'] : '');
+$tpl_name = (array_key_exists('tpl_name', $_REQUEST) ? $_REQUEST['tpl_name'] : '');
+$upld_cmnt = (array_key_exists('upld_cmnt', $_REQUEST) ? $_REQUEST['upld_cmnt'] : '');
+
+// --- ID取得
+$tpl_id = getNextID($db, "tpl", "tpl_id");
+$schema_id = getNextID($db, "`schema`", "schema_id");
+
+// --- データ存在チェック (親データ)
+$sel_sql = getSQLBaseForSopList();
+$sel_sql .= " AND sop.sop_id = :sop_id";
+
+$sql = "SELECT count(*) cnt FROM ($sel_sql) as tmp";
+
+$params = array();
+$params[':sop_id'] = $sop_id;
+
+$stmt = $db->prepare($sql);
+$stmt->execute($params);
+
+$cnt = 0;
+foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row){
+    $cnt = (int)$row['cnt'];
+}
+
+if($cnt == 0){
+    \Sop\Log::warning(__FILE__, __LINE__, 'Specified template does not exist.');
+    \Sop\Api::exitWithError(array("アップロード先のデータは既に削除されています"));
+}
+
+// ---------------------------
+// ファイルアップロード
+// ---------------------------
+$ext = ''; // schema_file 拡張子
+$file_path = ''; // schema_file 移動先 path
+$original_filename = ''; // shcema_file ファイル名(拡張子なし)
+$word_file_path = ''; // word_file 移動先 path (SOP Image の場合のみ)
+foreach($_FILES as $key=>$upld_file)
+{
+    if($schema_type != $SCHEMA_TYPE_SRC && $key == 'word_file') continue;
+
+    // --- エラーコードが 0(:OK) 以外の場合
+    if($upld_file['error'] != UPLOAD_ERR_OK)
+    {
+        //ファイルが残っている場合は、削除する
+        if(isset($extract_dir) && is_dir($extract_dir)) {
+            $pageList = glob("{$extract_dir}/*.png");
+            foreach($pageList as $imagefilepath){
+                unlink($imagefilepath);
+            }
+            rmdir($extract_dir);
+            unset($extract_dir);
+        }
+        if(isset($upload_dir) && is_dir($upload_dir)){
+            $pageList = glob("{$upload_dir}/*.png");
+            foreach($pageList as $imagefilepath){
+                unlink($imagefilepath);
+            }
+            rmdir($upload_dir);
+            unset($upload_dir);
+        }
+
+        \Sop\Log::warning(__FILE__, __LINE__, 'Failed to update file. error code:' . $upld_file['error']);
+        \Sop\Api::exitWithError(array("ファイルを確認してください エラーコード：{$upld_file['error']}"));
+    }
+
+    // --- HTTP POST でアップロードされたファイルではない場合
+    if(!is_uploaded_file($upld_file['tmp_name']))
+    {
+        \Sop\Log::warning(__FILE__, __LINE__, 'Invalid file is uploaded.');
+        \Sop\Api::exitWithError(array("正しいファイルではありません"));
+    }
+
+    // --- 拡張子が違う場合
+    $path_info = pathinfo($upld_file['name']);
+    $ext = $path_info['extension'];
+    // アップロード時のファイル名
+    $original_filename = $path_info['filename'];
+
+    if($schema_type == $SCHEMA_TYPE_SRC)
+    {
+        if($key == 'schema_file')
+        {
+            if($ext != 'sopimage')
+            {
+                \Sop\Log::warning(__FILE__, __LINE__, 'Invalid sopimage is uploaded.');
+                \Sop\Api::exitWithError(array("sopimage形式でアップロードしてください"));
+            }
+        }
+        if($key == 'word_file')
+        {
+            if($ext != 'docx' && $ext != 'doc')
+            {
+                \Sop\Log::warning(__FILE__, __LINE__, 'Invalid word file is uploaded.');
+                \Sop\Api::exitWithError(array("元のWordファイル は Word形式でアップロードしてください"));
+            }
+        }
+    }
+    if($schema_type == $SCHEMA_TYPE_TBL)
+    {
+        if($ext != 'xls' && $ext != 'xlsx')
+        {
+            \Sop\Log::warning(__FILE__, __LINE__, 'Invalid excel file is uploaded.');
+            \Sop\Api::exitWithError(array("Excel形式でアップロードしてください"));
+        }
+    }
+
+
+    // --- move_uploaded_file で失敗した場合
+    if($key == 'word_file')
+    {
+        $word_file_path = "$DATA_DIR_PATH_FILE/{$pj_id}_{$sop_id}_{$tpl_id}_{$schema_id}.$ext"; // 移動先ファイルパス
+        if(!move_uploaded_file($upld_file['tmp_name'], $word_file_path))
+        {
+            \Sop\Log::error(__FILE__, __LINE__, 'Failed to move_uploaded_file.');
+            \Sop\Api::exitWithError(array("アップロードに失敗しました : word_file"));
+        }
+    }
+    else
+    {
+        // sopimage ファイル展開 or ファイルを正規のパスに移動
+        if($ext == 'sopimage') {
+            $zip = new ZipArchive();
+            $fd = $zip->open($upld_file['tmp_name']);
+
+            if($fd === TRUE){
+                $now = date("Ymd_His");
+                $extract_dir = "$DATA_DIR_PATH_FILE/.{$pj_id}_{$sop_id}_{$tpl_id}_{$schema_id}_{$now}";
+
+                // 保存先ディレクトリ作成
+                if( ! is_dir($extract_dir) ) {
+                    if( ! mkdir($extract_dir) ) {
+                        \Sop\Log::error(__FILE__, __LINE__, 'Failed to make directory:' . $extract_dir);
+                        \Sop\Api::exitWithError(array("展開先ディレクトリの作成に失敗しました。"));
+                    }
+                }
+
+                $zip->extractTo($extract_dir);
+                $zip->close();
+
+                // 1.png が存在するかチェックする。
+                if( ! file_exists("$extract_dir/1.png")){
+                    // ない場合は展開済みのファイルを削除。
+                    $pageList = glob("{$extract_dir}/*.png");
+                    foreach($pageList as $imagefilepath){
+                        // error_log("unlink: " . $imagefilepath );
+                        unlink($imagefilepath);
+                    }
+                    rmdir($extract_dir);
+
+                    \Sop\Log::warning(__FILE__, __LINE__, 'Invalid sopimage is uploaded.');
+                    \Sop\Api::exitWithError(array("対応してないsopimageファイルです。"));
+
+                } else {
+                    $upload_dir = "$DATA_DIR_PATH_FILE/{$pj_id}_{$sop_id}_{$tpl_id}_{$schema_id}";
+                    rename($extract_dir, $upload_dir);
+                }
+            }
+
+            $fd = NULL;
+            $zip = NULL;
+
+            // 後続処理で使うため、変数定義はする。
+            $file_path = "$DATA_DIR_PATH_FILE/{$pj_id}_{$sop_id}_{$tpl_id}_{$schema_id}.$ext"; // 移動先ファイルパス
+        } else {
+            $file_path = "$DATA_DIR_PATH_FILE/{$pj_id}_{$sop_id}_{$tpl_id}_{$schema_id}.$ext"; // 移動先ファイルパス
+            if(!move_uploaded_file($upld_file['tmp_name'], $file_path))
+            {
+                \Sop\Log::error(__FILE__, __LINE__, 'Failed to move_uploaded_file.');
+                \Sop\Api::exitWithError(array("アップロードに失敗しました"));
+            }
+        }
+    }
+}
+
+// ---------------------------
+// ファイル解析
+// ---------------------------
+// --- HTMLファイル作成
+if($schema_type == $SCHEMA_TYPE_SRC) {
+    // sopimage ファイルを展開したディレクトリ
+    $extract_dir = "$DATA_DIR_PATH_FILE/{$pj_id}_{$sop_id}_{$tpl_id}_{$schema_id}";
+
+    // 通常の HTML ソース用
+    $htmlSource = array(
+        '<!DOCTYPE html>',
+        '<html lang="ja">',
+        '<head><title></title></head>',
+        '<body>',
+            '<div id="template">',
+                '<div id="hwr_mark_list" style="width: 100px; height:100%; z-index=10000; float: right; " ></div>',
+                '<div id="sop">'
+    );
+
+    // 画像をbase64フォーマットで一つの HTML に合体させたソース用
+    $entireHtmlSource = array(
+        '<!DOCTYPE html>',
+        '<html lang="ja">',
+        '<head><title></title></head>',
+        '<body>',
+            '<div id="template">',
+                '<div id="hwr_mark_list" style="width: 100px; height:100%; z-index=10000; float: right; " ></div>',
+                '<div id="sop">'
+    );
+
+    $pageList = glob("{$extract_dir}/*.png");
+    // 10ページ以上あった場合にページ順に並べるためにnatsortをかける。
+    // （globのままだと、1, 10, 11, 12, ..., 2, 3, 4と並ぶため）
+    natsort($pageList);
+    $notFirst = false;
+    foreach ($pageList as $imagefilepath) {
+        list($width, $height) = getimagesize($imagefilepath);
+        $atribute = 'style="width: 100%; margin: 0; padding: 0; display: block;" data-original-width="' . $width . '" data-original-height="' . $height . '"';
+
+        if($notFirst){
+            $htmlSource[] =  $PAGE_BREAK_TAG;
+            $entireHtmlSource[] = $PAGE_BREAK_TAG;
+        } else {
+            $notFirst = true;
+        }
+
+        // 画像独立版
+        $page = str_replace(".png", "", basename($imagefilepath));
+        $showImageURL = "src/tpl_show_image.php?pj_id={$pj_id}&sop_id={$sop_id}&tpl_id={$tpl_id}&schema_id={$schema_id}&page={$page}";
+        $htmlSource[] =  '<img src="' . $showImageURL . '" ' . $atribute . '/>';
+
+        // 画像埋め込み版
+        $data = file_get_contents($imagefilepath);
+        $data = base64_encode($data);
+        $entireHtmlSource[] = '<img src="data:image/png;base64,' . $data . '" ' . $atribute . '/>';
+    }
+
+    $htmlSource[] = \Sop\Constant::FORM_INJECTION_TAG;
+    $htmlSource[] = '</div>'; // sop
+    $htmlSource[] = '</div>'; // template
+    $htmlSource[] = '</body>';
+    $htmlSource[] = '</html>';
+
+    $entireHtmlSource[] = \Sop\Constant::FORM_INJECTION_TAG;
+    $entireHtmlSource[] = '</div>'; // sop
+    $entireHtmlSource[] = '</div>'; // template
+    $entireHtmlSource[] = '</body>';
+    $entireHtmlSource[] = '</html>';
+
+    $htmlFileName = "$DATA_DIR_PATH_FILE/{$pj_id}_{$sop_id}_{$tpl_id}_{$schema_id}.html" ;
+    if( ! file_put_contents($htmlFileName, $htmlSource, LOCK_EX) ) {
+        \Sop\Log::error(__FILE__, __LINE__, 'Failed to generate html file.');
+        \Sop\Api::exitWithError(array("HTML生成に失敗しました。 : normal"));
+    }
+
+    $entireHtmlFileName = str_replace('.html', '.entire.html', $htmlFileName);
+    if( ! file_put_contents($entireHtmlFileName, $entireHtmlSource, LOCK_EX) ) {
+        \Sop\Log::error(__FILE__, __LINE__, 'Failed to generate entire html file.');
+        \Sop\Api::exitWithError(array("HTML生成に失敗しました。 : entire"));
+    }
+}
+
+// --- Excel 読み込み処理
+$book_data = array();
+if($schema_type == $SCHEMA_TYPE_TBL)
+{
+    include_once(__DIR__."/Classes/PHPExcel.php");
+    include_once(__DIR__."/Classes/PHPExcel/IOFactory.php");
+
+    // ブック
+    $reader = null;
+    if($ext == 'xls'){
+        $reader = PHPExcel_IOFactory::createReader("Excel5");
+    }
+    if($ext == 'xlsx'){
+        $reader = PHPExcel_IOFactory::createReader("Excel2007");
+    }
+    $book = $reader->load($file_path);
+
+    // シート
+    for($sheet_idx = 0; $sheet_idx < $book->getSheetCount(); $sheet_idx++)
+    {
+        $book->setActiveSheetIndex($sheet_idx);
+        $sheet = $book->getActiveSheet();
+
+        $sheet_name = $sheet->getTitle(); // シート名
+        $clmn_list = array();
+        $sheet_data = array();
+
+        // 行
+        for($row_idx = 1; $row_idx <= $sheet->getHighestRow(); $row_idx++)
+        {
+            $row_data = array();
+
+            // 列
+            $max_clmn=PHPExcel_Cell::columnIndexFromString($sheet->getHighestColumn());
+            for($clmn_idx = 0; $clmn_idx < $max_clmn; $clmn_idx++)
+            {
+                if($clmn_idx == 0) continue; // 0番目の列は意味を持たないのでスキップ
+
+                $value = $sheet->getCellByColumnAndRow($clmn_idx, $row_idx)->getValue();
+
+                if($row_idx <= 3)
+                {
+                    if($row_idx == 1) $clmn_list[$clmn_idx]['input_required'] = (bool)$value;
+
+                    if($row_idx == 2)
+                    {
+                        if(!in_array($value, $INPUT_TYPE_LIST_TBL))
+                        {
+                            $input_type_list_str = implode('&lt;br/&gt;&nbsp;・', $INPUT_TYPE_LIST_TBL);
+
+                            unlink($file_path);
+                            \Sop\Log::error(__FILE__, __LINE__, 'Invalid excel file is uploaded.');
+                            \Sop\Api::exitWithError(array("無効な入力形式が指定されています:",
+                                                          "2行目, {$value}",
+                                                          "",
+                                                          "下記のいずれかを入力してください",
+                                                          "・{$input_type_list_str}"));
+                        }
+                        $clmn_list[$clmn_idx]['input_type'] = $value;
+                    }
+                    if($row_idx == 3) $clmn_list[$clmn_idx]['clmn_name'] = $value;
+                }
+                else
+                {
+                    array_push($row_data, $value);
+                }
+            }
+            if($row_idx > 3) array_push($sheet_data, $row_data);
+        }
+        array_push($book_data, array('sheet_name'=>$sheet_name, 'clmn_list'=>$clmn_list, 'sheet_data'=>$sheet_data));
+    }
+}
+
+// ---------------------------
+// データ登録
+// ---------------------------
+$db->beginTransaction();
+
+$date = date("Y-m-d H:i:s");
+// --- TBL: tpl
+$rslt = addTpl($db, $tpl_id, $pj_id, $sop_id, $tpl_name, $APRV_FLG_PRE, $LATEST_FLG_NOT, $date, $user_id, $upld_cmnt);
+if(!$rslt)
+{
+    unlink($file_path);
+    if($schema_type == $SCHEMA_TYPE_SRC){unlink($word_file_path);}
+    \Sop\Log::error(__FILE__, __LINE__, 'Failed to add tpl.');
+    \Sop\Api::exitWithError(array("登録に失敗しました: tpl"));
+}
+
+if($schema_type == $SCHEMA_TYPE_SRC)
+{
+    // --- TBL: schema
+    $file_path = str_replace(".sopimage", ".html", $file_path);
+    $rslt = addSchema($db, $schema_id, $pj_id, $sop_id, $tpl_id, $SCHEMA_TYPE_SRC, $file_path, $original_filename);
+    if(!$rslt)
+    {
+        unlink($file_path);
+        unlink($word_file_path);
+        \Sop\Log::error(__FILE__, __LINE__, 'Failed to add schema.');
+        \Sop\Api::exitWithError(array("登録に失敗しました: schema"));
+    }
+
+    // 入力フォームの引き継ぎ
+    inheritanceForm($db, $pj_id, $sop_id, $tpl_id);
+}
+
+if($schema_type == $SCHEMA_TYPE_TBL)
+{
+    // --- TBL: schema
+    $rslt = addSchema($db, $schema_id, $pj_id, $sop_id, $tpl_id, $SCHEMA_TYPE_TBL, $file_path, $original_filename);
+    if(!$rslt)
+    {
+        unlink($file_path);
+        \Sop\Log::error(__FILE__, __LINE__, 'Failed to add schema.');
+        \Sop\Api::exitWithError(array("登録に失敗しました: schema"));
+    }
+
+    // $tbl_id = $seq_map['tbl'];
+    // $clmn_id = $seq_map['clmn'];
+    // $row_id = $seq_map['row'];
+    foreach($book_data as $sheet)
+    {
+
+        $sheet_name = $sheet['sheet_name'];
+        $clmn_list = $sheet['clmn_list'];
+        $sheet_data = $sheet['sheet_data'];
+
+        // --- TBL: tbl
+        $tbl_id = -1;
+        $rslt = addTbl($db, $tbl_id, $pj_id, $sop_id, $tpl_id, $schema_id, $sheet_name);
+        if(!$rslt)
+        {
+            unlink($file_path);
+            \Sop\Log::error(__FILE__, __LINE__, 'Failed to add tbl.');
+            \Sop\Api::exitWithError(array("登録に失敗しました: tbl"));
+        }
+        $tbl_id = getLastID($db);
+
+        // --- TBL: clmn
+        foreach($clmn_list as $idx=>$clmn)
+        {
+            $input_required = ((bool)$clmn['input_required'] == true) ? $INPUT_REQUIRED : $INPUT_REQUIRED_NOT;
+            $clmn_id = -1;
+            $rslt = addClmn($db, $clmn_id, $pj_id, $sop_id, $tpl_id, $schema_id, $tbl_id, $clmn['clmn_name'], $clmn['input_type'], $input_required);
+            if(!$rslt)
+            {
+                unlink($file_path);
+                \Sop\Log::error(__FILE__, __LINE__, 'Failed to add clmn.');
+                \Sop\Api::exitWithError(array("登録に失敗しました: clmn"));
+            }
+            $clmn_list[$idx]['clmn_id'] = getLastID($db); // row 更新用
+        }
+
+        // --- TBL: row
+        foreach($sheet_data as $row_order=>$row)
+        {
+            foreach($row as $idx=>$row_text)
+            {
+                $clmn_id = $clmn_list[$idx+1]['clmn_id'];
+                $row_id = -1;
+                $rslt = addRow($db, $row_id, $pj_id, $sop_id, $tpl_id, $schema_id, $tbl_id, $clmn_id, $row_text, $row_order);
+                if(!$rslt)
+                {
+                    unlink($file_path);
+                    \Sop\Log::error(__FILE__, __LINE__, 'Failed to add row.');
+                    \Sop\Api::exitWithError(array("登録に失敗しました: row"));
+                }
+            }
+        }
+    }
+}
+
+// --- TBL: history
+$history_id = -1;
+$rslt = addHistory($db, $history_id, $pj_id, $sop_id, $tpl_id, $schema_id, null, null, $HISTORY_ACTION_TPL_UPLD, $date, $user_id, null, $upld_cmnt);
+if(!$rslt)
+{
+    unlink($file_path);
+    if($schema_type == $SCHEMA_TYPE_SRC){unlink($word_file_path);}
+    \Sop\Log::error(__FILE__, __LINE__, 'Failed to add history.');
+    \Sop\Api::exitWithError(array("登録に失敗しました: history"));
+}
+
+
+// ---------------------------
+// 終了処理
+// ---------------------------
+$db->commit();
+$db = null;
+
+echo json_encode(array('success'=>true, 'msg'=> \Sop\Api::htmlEncodeLines(array('アップロードが完了しました')), 'role_aprv'=>(bool)$role_aprv, 'role_upld'=>(bool)$role_upld));
+exit;

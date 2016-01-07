@@ -1,0 +1,8 @@
+{
+    "name": "hgc/sop-backend",
+    "require": {
+        "symfony/yaml": "~2.6",
+        "ivan-novakov/php-openid-connect-client": "dev-master"
+    },
+    "minimum-stability": "stable"
+}
