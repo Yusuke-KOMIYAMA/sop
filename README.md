@@ -15,6 +15,14 @@ In a life science and biomedical field, a researcher, a medical doctor needs a s
 
 ---
 
+#### NOTICE
+* This repository only distributes the source code of OpenSOP for an end-user, if you are an end-user that need a detail information about the usage, please visit our website.
+[RegMed project](http://regmed.hgc.jp)
+
+* We are distributing [the virtual container of OpenSOP on the Docker Hub](https://hub.docker.com/r/komiyama/sop/).
+
+---
+
 #### INSTALL
 
 ##### Preparation of Docker for Mac OSX
